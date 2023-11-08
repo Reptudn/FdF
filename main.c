@@ -15,9 +15,10 @@ t_map	create_map(char *map_name, int fd)
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
-	short	run;
-	short	update;
+	t_map		map;
+	t_camera	cam;
+	short		run;
+	short		update;
 
 	run = 1;
 	update = 0;
@@ -27,14 +28,20 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY));
+	if (!map)
+	{
+		printf("Error creating map\n");
+		return (1);
+	}
 	open_window(argv[1], WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT);
+	draw_map(&map);
 	while(run == 1)
 	{
 		if (update == 0)
 			continue ;
 		rotate_map(&map, 0); // calcualte new quaternion
+		move_camera(&cam, 0); //calculate new transform
 		draw_map(&map);
-		
 	}
 	free(map);
 	close_window();

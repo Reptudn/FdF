@@ -2,6 +2,18 @@
 # define FDF_H
 
 #include <math.h>
+#include <fcntl.h>
+
+#ifdef __linux__
+# include "./sources/minilibx_linux/mlx.h"
+# include "./sources/minilibx_linux/mlx_int.h"
+#elif __APPLE
+# include "./sources/minilibx_macos/mlx.h"
+# include "./sources/minilibx_macos/mlx_int.h"
+#else
+# include "./sources/minilibx/mlx.h"
+# include "./sources/minilibx/mlx_int.h"
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,15 +67,28 @@ typedef struct	s_map
 	s_vector3		**points;
 }				t_map;
 
-t_vector3	**get_map(int fd);
+t_vector3		**get_map(int fd);
 
 // map
-void	move_camera(t_camera *cam, t_vector3 pos, t_quaternion rot);
-void	rotate_map(t_map *map, t_quaternion rot);
-void	draw_map(t_map	*map);
+void			rotate_map(t_map *map, t_quaternion rot);
+void			draw_map(t_map	*map);
 
 // window
-void	open_window(char *name, int width, int height);
-void	close_window();
+void			open_window(char *name, int width, int height);
+void			close_window();
+
+// camera
+void			move_camera(t_camera cam, t_transform transform);
+
+// math
+t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
+t_vector3		vector_substract(t_vector3 vec1, t_vector3 vec2);
+double			vector_distance(t_vector3 vec1, t_vector3 vec2);
+double			vector_length(t_vector3 vec);
+t_vector3		vector_new(int x, int y, int z);
+t_quaternion	quaternion_add(t_quaternion quaternion1, t_quaternion quaternion2);
+double			quaternion_dotprod(t_quaternion quaternion1, t_quaternion quaternion2);
+double			quaternion_angle_between(t_quaternion quaternion1, t_quaternion quaternion2);
+t_quaternion	quaternion_new(int x, int y, int z, int w);
 
 #endif
