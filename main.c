@@ -6,11 +6,12 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:50:05 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:30:15 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "sources/minilibx_macos/mlx.h"
 
 t_map	create_map(char *map_name, int fd)
 {
@@ -33,6 +34,9 @@ int	gameloop(t_map *map, t_camera *cam)
 	map_draw(map, cam);
 	while (run == 1)
 	{
+		// event ckeck should be here
+		if (run == 0)
+			break ;
 		if (update == 0)
 			continue ;
 		map_rotate(map, (t_quaternion){0, 0, 0, 0});
@@ -47,17 +51,25 @@ int	main(int argc, char **argv)
 {
 	t_map		map;
 	t_camera	cam;
+	void		*mlx;
+	void		*window;
 
 	if (argc != 2)
 	{
-		printf("No file given\n");
-		return (1);
+		debug_error("No file given\n");
+		return (RUN_ERROR);
+	}
+	if (!mlx_init())
+	{
+		debug_error("Could not initialize mlx\n");
+		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY));
 	cam = camera_create((t_vector3){0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
-	open_window(argv[1], WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT);
+	if (!window_open(argv[1], mlx, window))
+		return (RUN_ERROR);
 	gameloop(&map, &cam);
-	close_window();
-	return (0);
+	window_close(window);
+	return (RUN_SUCCESS);
 }

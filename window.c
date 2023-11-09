@@ -6,20 +6,25 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:15:05 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:15:23 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:11:20 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	open_window(char *name, int width, int height)
+#include "fdf.h"
+
+int	window_open(char *name, void *mlx, void *window)
 {
-	/*
-	*	Open window stuff
-	*	also probably gotta add some kind of window type
-	*	or struct as agrument or just retunr it in the end
-	*/
+	window = mlx_new_window(mlx, WINDOW_DEFAULT_WIDTH,
+			WINDOW_DEFAULT_HEIGHT, name);
+	if (!window)
+	{
+		debug_error("Could not open window\n");
+		return (0);
+	}
+	return (1);
 }
 
-void	close_window(void)
+void	window_close(void *window)
 {
 	/*
 	*	Close window stuff
@@ -27,7 +32,7 @@ void	close_window(void)
 	*/
 }
 
-void	resize_window(void)
+void	window_resize(void *window, int width, int height)
 {
 	/*
 	*	Resize window stuff

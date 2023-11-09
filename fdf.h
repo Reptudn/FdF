@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:54:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:34:09 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 
 # ifdef __linux__
 #  include "./sources/minilibx_linux/mlx.h"
-#  include "./sources/minilibx_linux/mlx_int.h"
+// #  include "./sources/minilibx_linux/mlx_int.h"
 # elif __APPLE__
 #  include "./sources/minilibx_macos/mlx.h"
-#  include "./sources/minilibx_macos/mlx_int.h"
+// #  include "./sources/minilibx_macos/mlx_int.h"
 # else
 #  include "./sources/minilibx/mlx.h"
-#  include "./sources/minilibx/mlx_int.h"
+// #  include "./sources/minilibx/mlx_int.h"
 # endif
 
 # include <stdio.h>
@@ -40,6 +40,9 @@
 # define WINDOW_DEFAULT_HEIGHT	720
 
 # define CAMERA_DEFAULT_FOV		60
+
+# define RUN_SUCCESS			0
+# define RUN_ERROR				-1
 
 typedef struct s_vector3
 {
@@ -58,8 +61,8 @@ typedef struct s_quaternion
 
 typedef struct s_transform
 {
-	s_vector3		position;
-	s_quaternion	rotation;
+	t_vector3		position;
+	t_quaternion	rotation;
 }				t_transform;
 
 typedef struct s_line
@@ -80,7 +83,7 @@ typedef struct s_map
 	int				size_x;
 	int				size_y;
 	t_transform		transform;
-	s_vector3		**points;
+	t_vector3		**points;
 }				t_map;
 
 t_vector3		**get_map(int fd);
@@ -90,9 +93,13 @@ void			map_rotate(t_map *map, t_quaternion rot);
 void			map_draw(t_map	*map, t_camera *cam);
 
 // window
-void			open_window(char *name, int width, int height);
-void			close_window(void);
-void			resize_window(void);
+int				window_open(char *name, void *mlx, void *window);
+void			window_close(void *window);
+void			window_resize(void *window, int width, int height);
+
+// events
+short			event_triggered(void *mlx, short *run);
+int				register_all_events(void *mlx);
 
 // camera
 void			camera_move(t_camera *cam, t_transform transform);
