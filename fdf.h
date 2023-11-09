@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:17:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 09:38:19 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,16 @@ void			resize_window(void);
 // camera
 void			move_camera(t_camera *cam, t_transform transform);
 
+// draw
+void			draw_line(t_line line);
+
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
 t_vector3		vector_substract(t_vector3 vec1, t_vector3 vec2);
 double			vector_distance(t_vector3 vec1, t_vector3 vec2);
 double			vector_length(t_vector3 vec);
 t_vector3		vector_new(int x, int y, int z);
+t_vector3		vector_rotate(t_vector3 vec, t_quaternion rot);
 t_quaternion	quaternion_add(t_quaternion quaternion1,
 					t_quaternion quaternion2);
 double			quaternion_dotprod(t_quaternion quaternion1,
@@ -106,6 +110,9 @@ double			quaternion_dotprod(t_quaternion quaternion1,
 double			quaternion_angle_between(t_quaternion quaternion1,
 					t_quaternion quaternion2);
 t_quaternion	quaternion_new(int x, int y, int z, int w);
+
+// raycast
+int				is_visible_to_camera(t_camera *cam, t_vector3 *point);
 
 // debug
 void			debug_error(char *error_msg);

@@ -6,13 +6,13 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:17:31 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 09:38:00 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line(t_line line, struct s_colname) //include that one from mlx_rgb.c
+void	draw_line(t_line line)
 {
 	/*
 	draws a line with the help of the t_line start end end
