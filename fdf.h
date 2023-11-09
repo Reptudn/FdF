@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:48:38 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 09:54:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <math.h>
 # include <fcntl.h>
+
+# include <OpenGL/gl3.h> //needed for mlx_int.h
 
 # ifdef __linux__
 #  include "./sources/minilibx_linux/mlx.h"
