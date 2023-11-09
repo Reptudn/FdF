@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 10:59:26 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 13:11:47 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 
 # include <OpenGL/gl3.h> //needed for mlx_int.h
+
+// https://harm-smits.github.io/42docs/libs/minilibx/events.html
 
 # ifdef __linux__
 #  include "./sources/minilibx_linux/mlx.h"
@@ -44,6 +46,26 @@
 
 # define RUN_SUCCESS			0
 # define RUN_ERROR				-1
+
+typedef enum e_events
+{
+	EVENT_KEY_PRESS = 2,
+	EVENT_KEY_RELEASE = 3,
+	EVENT_MOUSE_PRESS = 4,
+	EVENT_MOUSE_RELEASE = 5,
+	EVENT_MOUSE_MOVE = 6,
+	EVENT_EXPOSE = 12,
+	EVENT_CLOSE = 17
+}				t_events;
+
+typedef enum e_mousekeys
+{
+	MOUSE_LEFT = 1,
+	MOUSE_RIGHT = 2,
+	MOUSE_MIDDLE = 3,
+	MOUSE_SCROLL_UP = 4,
+	MOUSE_SCROLL_DOWN = 5
+}				t_mousekeys;
 
 typedef struct s_vector3
 {
@@ -87,6 +109,12 @@ typedef struct s_map
 	t_vector3		**points;
 }				t_map;
 
+typedef struct s_vars
+{
+	short	*run;
+	short	*update;
+}				t_vars;
+
 t_vector3		**get_map(int fd);
 
 // map
@@ -100,8 +128,7 @@ void			window_close(void *mlx, void *window);
 void			window_clear(void *mlx, void *window);
 
 // events
-short			event_triggered(void *mlx, short *run);
-int				register_all_events(void *mlx);
+int				register_all_events(void *mlx, void *window, t_vars *vars);
 
 // camera
 void			camera_move(t_camera *cam, t_transform transform);

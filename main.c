@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 11:01:29 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 13:12:01 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ void	gameloop(t_map *map, t_camera *cam, void *mlx, void *window)
 
 	run = 1;
 	update = 0;
-	debug_error("Gameloop started");
+	if (!register_all_events(mlx, window, &(t_vars){&run, &update}))
+	{
+		debug_error("Could not register events\n");
+		return ;
+	}
+	debug_error("Gameloop started and events registered\n");
 	map_draw(map, cam);
 	while (run == 1)
 	{
-		// event ckeck should be here
-		// (the events the get pointers to run and update
-		if (run == 0)
-			break ;
 		if (update == 0)
 			continue ;
 		map_rotate(map, (t_quaternion){0, 0, 0, 0});
@@ -73,7 +74,7 @@ int	main(int argc, char **argv)
 	cam = camera_create((t_vector3){0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	window = 0;
-	if (!window_open(argv[1], mlx, window))
+	if (!window_open("FdF by jkauker", mlx, window))
 		return (RUN_ERROR);
 	gameloop(&map, &cam, mlx, window);
 	window_close(mlx, window);

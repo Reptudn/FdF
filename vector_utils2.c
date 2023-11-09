@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:24:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:28:28 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 11:55:14 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_vector3	vector_rotate(t_vector3 vec, t_quaternion rot)
 	x = vec.x;
 	y = vec.y;
 	z = vec.z;
-
 	new.x = (1 - 2 * pow(rot.y, 2) - 2 * pow(rot.z, 2)) * x
 		+ (2 * rot.x * rot.y - 2 * rot.z * rot.w) * y
 		+ (2 * rot.x * rot.z + 2 * rot.y * rot.w) * z;
