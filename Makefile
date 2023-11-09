@@ -1,13 +1,22 @@
 NAME	= fdf
-SRC		= main.c camera.c draw.c file_utils.c map.c vector_utils.c window.c quaternion_utils.c
+SRC		= camera.c debug.c draw.c events.c file_utils.c main.c map.c quaternion_utils.c \
+			raycast.c vector_utils.c vector_utils2.c window.c
+OBJ		= $(SRC:.c=.o)
 FLAGS	= -Wall -Werror -Wextra
+COMP	= cc
 INCL	=
 
-all:
-	cc $(FLAGS) -o -I $(INCL) $(NAME) $(SRC)
+.PHONY: all clean fclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+		$(COMP) $(FLAGS) -o  $(NAME) -I $(INCL) $(SRC)
 
 clean:
+		rm -rf $(OBJ)
 
 fclean: clean
+		rm -rf $(NAME)
 
-re:
+re: flcean all
