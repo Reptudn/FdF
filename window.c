@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 09:15:05 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/09 09:15:23 by jkauker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 void	open_window(char *name, int width, int height)
 {
 	/*
@@ -7,7 +19,7 @@ void	open_window(char *name, int width, int height)
 	*/
 }
 
-void	close_window()
+void	close_window(void)
 {
 	/*
 	*	Close window stuff
@@ -15,7 +27,7 @@ void	close_window()
 	*/
 }
 
-void	resize_window()
+void	resize_window(void)
 {
 	/*
 	*	Resize window stuff

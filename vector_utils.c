@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 09:14:58 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/09 09:16:59 by jkauker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 t_vector3	vector_add(t_vector3 vec1, t_vector3 vec2)
@@ -13,7 +25,7 @@ t_vector3	vector_add(t_vector3 vec1, t_vector3 vec2)
 t_vector3	vector_substract(t_vector3 vec1, t_vector3 vec2)
 {
 	t_vector3	new;
-	
+
 	new.x = vec1.x - vec2.x;
 	new.y = vec1.y - vec2.y;
 	new.z = vec1.z - vec2.z;

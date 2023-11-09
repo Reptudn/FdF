@@ -1,38 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/09 09:17:27 by jkauker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
-#include <math.h>
-#include <fcntl.h>
+# include <math.h>
+# include <fcntl.h>
 
-#ifdef __linux__
-# include "./sources/minilibx_linux/mlx.h"
-# include "./sources/minilibx_linux/mlx_int.h"
-#elif __APPLE
-# include "./sources/minilibx_macos/mlx.h"
-# include "./sources/minilibx_macos/mlx_int.h"
-#else
-# include "./sources/minilibx/mlx.h"
-# include "./sources/minilibx/mlx_int.h"
-#endif
+# ifdef __linux__
+#  include "./sources/minilibx_linux/mlx.h"
+#  include "./sources/minilibx_linux/mlx_int.h"
+# elif __APPLE__
+#  include "./sources/minilibx_macos/mlx.h"
+#  include "./sources/minilibx_macos/mlx_int.h"
+# else
+#  include "./sources/minilibx/mlx.h"
+#  include "./sources/minilibx/mlx_int.h"
+# endif
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-#define WINDOW_MIN_WIDTH		640
-#define WINDOW_MAX_WIDTH		-1
-#define WINDOW_MIN_HEIGHT		480
-#define WINDOW_MAX_HEIGHT		-1
-#define WINDOW_DEFAULT_WIDTH	1080
-#define WINDOW_DEFAULT_HEIGHT	720
+# define WINDOW_MIN_WIDTH		640
+# define WINDOW_MAX_WIDTH		-1
+# define WINDOW_MIN_HEIGHT		480
+# define WINDOW_MAX_HEIGHT		-1
+# define WINDOW_DEFAULT_WIDTH	1080
+# define WINDOW_DEFAULT_HEIGHT	720
 
-typedef struct	s_vector3
+typedef struct s_vector3
 {
 	int	x;
 	int	y;
 	int	z;
 }				t_vector3;
 
-typedef struct	s_quaternion
+typedef struct s_quaternion
 {
 	int	x;
 	int	y;
@@ -40,25 +52,25 @@ typedef struct	s_quaternion
 	int	w;
 }				t_quaternion;
 
-typedef struct	s_transform
+typedef struct s_transform
 {
 	s_vector3		position;
 	s_quaternion	rotation;
 }				t_transform;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	t_vector3	start;
 	t_vector3	end;
 }				t_line;
 
-typedef	struct	s_camera
+typedef struct s_camera
 {
 	t_transform		transform;
 	double			fov;
 }				t_camera;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char			*map_name;
 	int				size_x;
@@ -75,7 +87,8 @@ void			draw_map(t_map	*map, t_camera *cam);
 
 // window
 void			open_window(char *name, int width, int height);
-void			close_window();
+void			close_window(void);
+void			resize_window(void);
 
 // camera
 void			move_camera(t_camera *cam, t_transform transform);
@@ -86,9 +99,16 @@ t_vector3		vector_substract(t_vector3 vec1, t_vector3 vec2);
 double			vector_distance(t_vector3 vec1, t_vector3 vec2);
 double			vector_length(t_vector3 vec);
 t_vector3		vector_new(int x, int y, int z);
-t_quaternion	quaternion_add(t_quaternion quaternion1, t_quaternion quaternion2);
-double			quaternion_dotprod(t_quaternion quaternion1, t_quaternion quaternion2);
-double			quaternion_angle_between(t_quaternion quaternion1, t_quaternion quaternion2);
+t_quaternion	quaternion_add(t_quaternion quaternion1,
+					t_quaternion quaternion2);
+double			quaternion_dotprod(t_quaternion quaternion1,
+					t_quaternion quaternion2);
+double			quaternion_angle_between(t_quaternion quaternion1,
+					t_quaternion quaternion2);
 t_quaternion	quaternion_new(int x, int y, int z, int w);
+
+// debug
+void			debug_error(char *error_msg);
+void			debug_log(char *log_msg);
 
 #endif

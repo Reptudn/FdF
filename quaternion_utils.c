@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quaternion_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 09:14:50 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/09 09:17:14 by jkauker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-t_quaternion	quaternion_add(t_quaternion quaternion1, t_quaternion quaternion2)
+t_quaternion	quaternion_add(t_quaternion quaternion1,
+					t_quaternion quaternion2)
 {
 	t_quaternion	new;
 
@@ -14,12 +27,13 @@ t_quaternion	quaternion_add(t_quaternion quaternion1, t_quaternion quaternion2)
 double	quaternion_dotprod(t_quaternion quaternion1, t_quaternion quaternion2)
 {
 	return (quaternion1.w * quaternion2.w
-			+ quaternion1.x * quaternion2.x
-			+ quaternion1.y * quaternion2.y
-			+ quaternion1.z * quaternion2.z);
+		+ quaternion1.x * quaternion2.x
+		+ quaternion1.y * quaternion2.y
+		+ quaternion1.z * quaternion2.z);
 }
 
-double	quaternion_angle_between(t_quaternion quaternion1, t_quaternion quaternion2)
+double	quaternion_angle_between(t_quaternion quaternion1,
+			t_quaternion quaternion2)
 {
 	return (2 * acos(fabs(quaternion_dotprod(quaternion1, quaternion2))));
 }

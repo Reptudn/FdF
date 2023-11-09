@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:17:31 by jkauker          ###   ########.fr       */
+/*   Created: 2023/11/09 09:17:38 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/09 09:17:39 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line(t_line line, struct s_colname) //include that one from mlx_rgb.c
+void	debug_error(char *error_msg)
 {
-	/*
-	draws a line with the help of the t_line start end end
+	printf("[Err] %s\n", error_msg);
+}
 
-	y = mx + b
-
-	while (start is not end)
-	{
-		draw pixel at y = m*x
-		increase at specific step rate start.x until at end.x?
-		also with y
-		dont know if we need m
-	}
-	*/
+void	debug_log(char *log_msg)
+{
+	printf("[Log] %s\n", log_msg);
 }
