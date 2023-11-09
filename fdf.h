@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:38:19 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 09:48:38 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define WINDOW_MAX_HEIGHT		-1
 # define WINDOW_DEFAULT_WIDTH	1080
 # define WINDOW_DEFAULT_HEIGHT	720
+
+# define CAMERA_DEFAULT_FOV		60
 
 typedef struct s_vector3
 {
@@ -82,8 +84,8 @@ typedef struct s_map
 t_vector3		**get_map(int fd);
 
 // map
-void			rotate_map(t_map *map, t_quaternion rot);
-void			draw_map(t_map	*map, t_camera *cam);
+void			map_rotate(t_map *map, t_quaternion rot);
+void			map_draw(t_map	*map, t_camera *cam);
 
 // window
 void			open_window(char *name, int width, int height);
@@ -91,7 +93,9 @@ void			close_window(void);
 void			resize_window(void);
 
 // camera
-void			move_camera(t_camera *cam, t_transform transform);
+void			camera_move(t_camera *cam, t_transform transform);
+t_camera		camera_create(t_vector3 position, t_quaternion rotation,
+					double fov);
 
 // draw
 void			draw_line(t_line line);

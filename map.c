@@ -6,19 +6,19 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:41:11 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 09:48:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	rotate_map(t_map *map, t_quaternion rot)
+void	map_rotate(t_map *map, t_quaternion rot)
 {
 	map->transform.rotation = quaternion_add(map->transform.rotation,
 			rot);
 }
 
-void	draw_map(t_map	*map, t_camera *cam)
+void	map_draw(t_map	*map, t_camera *cam)
 {
 	int			x;
 	int			y;
