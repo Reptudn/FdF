@@ -71,14 +71,14 @@ t_vector3		**get_map(int fd);
 
 // map
 void			rotate_map(t_map *map, t_quaternion rot);
-void			draw_map(t_map	*map);
+void			draw_map(t_map	*map, t_camera *cam);
 
 // window
 void			open_window(char *name, int width, int height);
 void			close_window();
 
 // camera
-void			move_camera(t_camera cam, t_transform transform);
+void			move_camera(t_camera *cam, t_transform transform);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
