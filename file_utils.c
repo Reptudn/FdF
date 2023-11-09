@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 09:14:17 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:53:07 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_vector3	**get_map(int fd)
 
 	x = 0;
 	y = 0;
+	map = (t_vector3 **)malloc(sizeof(t_vector3 *));
 	/*
 	* read file line by line and realloc the **map
 	* map[x][y] and the value whats in that is z

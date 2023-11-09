@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 10:34:09 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:59:26 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <math.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # include <OpenGL/gl3.h> //needed for mlx_int.h
 
@@ -94,8 +95,9 @@ void			map_draw(t_map	*map, t_camera *cam);
 
 // window
 int				window_open(char *name, void *mlx, void *window);
-void			window_close(void *window);
-void			window_resize(void *window, int width, int height);
+void			window_close(void *mlx, void *window);
+// void			window_resize(void *window, int width, int height);
+void			window_clear(void *mlx, void *window);
 
 // events
 short			event_triggered(void *mlx, short *run);

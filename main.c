@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 10:30:15 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 11:01:29 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ t_map	create_map(char *map_name, int fd)
 	return (map);
 }
 
-int	gameloop(t_map *map, t_camera *cam)
+void	gameloop(t_map *map, t_camera *cam, void *mlx, void *window)
 {
 	short		run;
 	short		update;
 
 	run = 1;
 	update = 0;
+	debug_error("Gameloop started");
 	map_draw(map, cam);
 	while (run == 1)
 	{
 		// event ckeck should be here
+		// (the events the get pointers to run and update
 		if (run == 0)
 			break ;
 		if (update == 0)
@@ -42,9 +44,11 @@ int	gameloop(t_map *map, t_camera *cam)
 		map_rotate(map, (t_quaternion){0, 0, 0, 0});
 		camera_move(cam, (t_transform){(t_vector3){0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
+		window_clear(mlx, window);
 		map_draw(map, cam);
 		update = 0;
 	}
+	debug_log("Gameloop ended");
 }
 
 int	main(int argc, char **argv)
@@ -59,7 +63,8 @@ int	main(int argc, char **argv)
 		debug_error("No file given\n");
 		return (RUN_ERROR);
 	}
-	if (!mlx_init())
+	mlx = mlx_init();
+	if (!mlx)
 	{
 		debug_error("Could not initialize mlx\n");
 		return (RUN_ERROR);
@@ -67,9 +72,10 @@ int	main(int argc, char **argv)
 	map = create_map(argv[1], open(argv[1], O_RDONLY));
 	cam = camera_create((t_vector3){0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
+	window = 0;
 	if (!window_open(argv[1], mlx, window))
 		return (RUN_ERROR);
-	gameloop(&map, &cam);
-	window_close(window);
+	gameloop(&map, &cam, mlx, window);
+	window_close(mlx, window);
 	return (RUN_SUCCESS);
 }

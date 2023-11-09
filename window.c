@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:15:05 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 10:11:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:59:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ int	window_open(char *name, void *mlx, void *window)
 	return (1);
 }
 
-void	window_close(void *window)
+void	window_close(void *mlx, void *window)
 {
-	/*
-	*	Close window stuff
-	*	Called when window has to be closed
-	*/
+	mlx_destroy_window(mlx, window);
 }
 
-void	window_resize(void *window, int width, int height)
+void	window_clear(void *mlx, void *window)
 {
-	/*
-	*	Resize window stuff
-	*	Called when window has to be resized
-	*	min size is defined in header
-	*/
+	mlx_clear_window(mlx, window);
 }
+
+// void	window_resize(void *window, int width, int height)
+// {
+// 	/*
+// 	*	Resize window stuff
+// 	*	Called when window has to be resized
+// 	*	min size is defined in header
+// 	*/
+// }

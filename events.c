@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 10:37:52 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:54:54 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	event_loop(void *mlx, void *window, short *run, short *update)
 		*update = 1;
 	if (mlx_mouse_hook(window, event_onmouse, NULL))
 		*update = 1;
+	*run = 1;
 	mlx_loop(mlx);
 	return (1);
 }
