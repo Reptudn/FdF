@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/09 13:11:47 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 10:04:25 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,19 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "./lib/MLX42/include/MLX42/MLX42.h"
 
-# include <OpenGL/gl3.h> //needed for mlx_int.h
+// # include <OpenGL/gl3.h> //needed for mlx_int.h
 
 // https://harm-smits.github.io/42docs/libs/minilibx/events.html
 
-# ifdef __linux__
-#  include "./sources/minilibx_linux/mlx.h"
-// #  include "./sources/minilibx_linux/mlx_int.h"
-# elif __APPLE__
-#  include "./sources/minilibx_macos/mlx.h"
-// #  include "./sources/minilibx_macos/mlx_int.h"
-# else
-#  include "./sources/minilibx/mlx.h"
-// #  include "./sources/minilibx/mlx_int.h"
-# endif
+// # ifdef __linux__
+// #  include "./sources/minilibx_linux/mlx.h"
+// # elif __APPLE__
+// #  include "./sources/minilibx_macos/mlx.h"
+// # else
+// #  include "./sources/minilibx/mlx.h"
+// # endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -74,6 +72,12 @@ typedef struct s_vector3
 	int	z;
 }				t_vector3;
 
+typedef struct s_vector2
+{
+	int	x;
+	int	y;
+}				t_vector2;
+
 typedef struct s_quaternion
 {
 	int	x;
@@ -87,6 +91,11 @@ typedef struct s_transform
 	t_vector3		position;
 	t_quaternion	rotation;
 }				t_transform;
+
+typedef struct s_matrice
+{
+	int				matrice[4][4];
+}				t_matrice;
 
 typedef struct s_line
 {
