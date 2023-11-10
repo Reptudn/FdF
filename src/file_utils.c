@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 17:15:13 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 17:21:24 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,19 @@ t_vector3	**get_map(int fd, t_vars *vars)
 	x = 0;
 	map = (t_vector3 **)malloc(sizeof(t_vector3 *));
 	if (!map)
-		return (NULL);
-	line = get_next_line(fd);
+		return (0);
+	write(1, "AA\n", 3);
+	line = get_next_line(fd); // why is here a sev????
 	if (!line)
-		return (NULL);
-	while (line != NULL) // from the secon loop it segv
+		return (0);
+	write(1, "BB\n", 3);
+	while (line != 0 && x < 1) // from the secon loop it segv
 	{
-		write(1, "x\n", 2);
 		contents = ft_split(line, ' ');
 		if (!contents)
 		{
 			free(map);
-			return (NULL);
+			return (0);
 		}
 		map[x] = (t_vector3 *)malloc(sizeof(t_vector3)
 				* (count_words(line) + 1));
@@ -73,10 +74,10 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		{
 			free(contents);
 			free(map);
-			return (NULL);
+			return (0);
 		}
 		y = 0;
-		while (contents[y + 1] != NULL)
+		while (contents[y] != 0)
 		{
 			if (ft_strchr(contents[y], ','))
 				map[x][y] = convert_to_vector3(x, y,
@@ -94,10 +95,10 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		{
 			free(map[x]);
 			free(map);
-			return (NULL);
+			return (0);
 		}
 		map = temp;
-		map[x + 1] = NULL;
+		map[x + 1] = 0;
 		write(1, "x++\n", 4);
 		x++;
 	}
