@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 13:37:15 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 13:42:57 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_line	initialize_line(t_vector2 start, t_vector2 end)
 **	It uses the circle equation to determine if a point is inside the circle.
 **	https://en.wikipedia.org/wiki/Circle#Equations
 */
-void	draw_dot(t_vector2 middle_point, unsigned int radius,
+void	draw_dot(t_vector2 middle_point, int radius,
 	void *param, int color)
 {
 	int		x;
@@ -60,6 +60,10 @@ void	draw_dot(t_vector2 middle_point, unsigned int radius,
 	t_vars	*vars;
 	int		dist;
 
+	if (radius < 0)
+		radius = -radius;
+	if (radius == 0)
+		radius = 1;
 	vars = (t_vars *)param;
 	x = middle_point.x - radius;
 	while (x < middle_point.x + radius)

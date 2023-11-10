@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 13:35:04 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 13:46:11 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../lib//ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
 
 // # include <OpenGL/gl3.h> //needed for mlx_int.h
 
@@ -154,7 +156,7 @@ int				get_a(int rgba);
 void			draw_line(t_vector2 start, t_vector2 end,
 					void *param, int color);
 void			draw_dot(t_vector2 middle_point,
-					unsigned int radius, void *param, int color);
+					int radius, void *param, int color);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);

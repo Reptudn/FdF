@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_utils.c                                      :+:      :+:    :+:   */
+/*   specifiers.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 12:17:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 13:43:04 by jkauker          ###   ########.fr       */
+/*   Created: 2023/10/08 21:27:41 by jonask            #+#    #+#             */
+/*   Updated: 2023/10/18 08:53:46 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_rgba(int r, int g, int b, int a)
-{
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
+#ifndef SPECIFIERS_H
+# define SPECIFIERS_H
 
-int	get_a(int rgba)
-{
-	return (rgba & 0xFF);
-}
+# define PREFIX			'%'
 
-int	get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
+# define CHAR			'c'
+# define STRING			's'
+# define POINTER		'p'
+# define DECIMAL		'd'
+# define INTEGER		'i'
+# define UINTEGER		'u'
+# define HEXSMALL		'x'
+# define HEXBIG			'X'
+# define PERCENT		'%'
 
-int	get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
+# define SPACE			' '
+# define HASHTAG		'#'
+# define PLUS			'+'
 
-int	get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
-}
+#endif

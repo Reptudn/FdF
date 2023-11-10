@@ -34,6 +34,9 @@ all: libmlx $(NAME)
 libft:
 	@make -C ./lib/libft
 
+ft_printf:
+	@make -C ./lib/ft_printf
+
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
@@ -41,15 +44,17 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS) libft
-	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a ./lib/ft_printf/libftprintf.a $(HEADERS) -o $(NAME)
 
 clean:
 	@make -C ./lib/libft clean
+	@make -C ./lib/ft_printf clean
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@make -C ./lib/libft fclean
+	@make -C ./lib/ft_printf fclean
 	@rm -rf $(NAME)
 
 re: clean all

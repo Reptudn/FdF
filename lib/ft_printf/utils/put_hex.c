@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_utils.c                                      :+:      :+:    :+:   */
+/*   put_hex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 12:17:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 13:43:04 by jkauker          ###   ########.fr       */
+/*   Created: 2023/10/23 15:12:41 by jkauker           #+#    #+#             */
+/*   Updated: 2023/10/23 15:23:07 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_rgba(int r, int g, int b, int a)
-{
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
+#include "../ft_printf.h"
 
-int	get_a(int rgba)
+void	put_hex(long long num, int capital, int prefix, int *writecount)
 {
-	return (rgba & 0xFF);
-}
-
-int	get_r(int rgba)
-{
-	return ((rgba >> 24) & 0xFF);
-}
-
-int	get_g(int rgba)
-{
-	return ((rgba >> 16) & 0xFF);
-}
-
-int	get_b(int rgba)
-{
-	return ((rgba >> 8) & 0xFF);
+	if (prefix == 1)
+	{
+		if (num == 0)
+			put_string("0x0", writecount);
+		else
+			put_base(num, 16, capital, writecount);
+	}
+	else
+	{
+		if (num == 0)
+			put_string("0", writecount);
+		else
+			put_base_hex(num, 16, capital, writecount);
+	}
 }
