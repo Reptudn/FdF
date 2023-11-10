@@ -1,28 +1,55 @@
-NAME	= fdf
-BUILD	= ./build/
-SRC		= camera.c debug.c draw.c events.c file_utils.c main.c map.c quaternion_utils.c \
-			raycast.c vector_utils.c vector_utils2.c window.c
-OBJ		= $(SRC:.c=.o)
-FLAGS	= -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
-COMP	= gcc
-INCL	=
+NAME	:= FdF
 
-.PHONY: all clean fclean re
+CFLAGS	:= -Wextra -Wall -Werror
 
-all: $(NAME)
+LIBMLX	:= ./lib/MLX42
+
+HEADERS	:= -I ./include -I $(LIBMLX)/include
+
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
+SRCDIR := ./src/
+
+SRCS	:=  $(SRCDIR)camera.c \
+			$(SRCDIR)debug.c \
+			$(SRCDIR)draw.c \
+			$(SRCDIR)events.c \
+			$(SRCDIR)file_utils.c \
+			$(SRCDIR)main.c \
+			$(SRCDIR)map.c \
+			$(SRCDIR)quaternion_utils.c \
+			$(SRCDIR)raycast.c \
+			$(SRCDIR)vector_to_2d_conversion.c \
+			$(SRCDIR)vector_utils.c \
+			$(SRCDIR)vector_utils2.c
+
+OBJS	:= ${SRCS:.c=.o}
+
+CC		:= gcc
+
+.PHONY: all, clean, fclean, re, libmlx
+
+all: libmlx $(NAME)
+
+libft:
+	@make -C ./lib/libft
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 %.o: %.c
-		$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
-$(NAME): $(OBJ)
-		cd ./sources/miniLibX && make
-		cd ../../
-		$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJS) libft
+	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a $(HEADERS) -o $(NAME)
 
 clean:
-		rm -rf $(OBJ)
+	@make -C ./lib/libft clean
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-		rm -rf $(NAME)
+	@make -C ./lib/libft fclean
+	@rm -rf $(NAME)
 
-re: flcean all
+re: clean all
