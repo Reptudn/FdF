@@ -6,18 +6,18 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 14:16:34 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 16:21:49 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_map	create_map(char *map_name, int fd)
+t_map	create_map(char *map_name, int fd, t_vars *vars)
 {
 	t_map	map;
 
 	map.map_name = map_name;
-	map.points = get_map(fd);
+	map.points = get_map(fd, vars);
 	map.transform.position = (t_vector3){0, 0, 0};
 	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	if (map.points == 0)
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 		debug_error("Could not initialize mlx");
 		return (RUN_ERROR);
 	}
-	map = create_map(argv[1], open(argv[1], O_RDONLY));
+	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
 	camera = camera_create((t_vector3){0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = &map;

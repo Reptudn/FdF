@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 14:08:57 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 16:23:16 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib//ft_printf/ft_printf.h"
+# include "../lib/get_next_line/get_next_line.h"
 # include "../lib/libft/libft.h"
 
 // # include <OpenGL/gl3.h> //needed for mlx_int.h
@@ -126,7 +127,7 @@ typedef struct s_vars
 	t_camera	*camera;
 }				t_vars;
 
-t_vector3		**get_map(int fd);
+t_vector3		**get_map(int fd, t_vars *vars);
 
 // map
 void			map_rotate(t_map *map, t_quaternion rot);
@@ -179,5 +180,6 @@ int				is_visible_to_camera(t_camera *cam, t_vector3 *point);
 // debug
 void			debug_error(char *error_msg);
 void			debug_log(char *log_msg);
+void			debug_print_map(t_map map);
 
 #endif
