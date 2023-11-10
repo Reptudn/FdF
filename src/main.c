@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 16:21:49 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 17:22:35 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 {
 	t_map	map;
 
+	if (fd == -1)
+	{
+		debug_error("Could not open file");
+		exit(1);
+	}
 	map.map_name = map_name;
 	map.points = get_map(fd, vars);
 	map.transform.position = (t_vector3){0, 0, 0};

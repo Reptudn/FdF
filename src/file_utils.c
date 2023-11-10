@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 17:21:24 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 17:24:16 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,9 @@ t_vector3	**get_map(int fd, t_vars *vars)
 	map = (t_vector3 **)malloc(sizeof(t_vector3 *));
 	if (!map)
 		return (0);
-	write(1, "AA\n", 3);
-	line = get_next_line(fd); // why is here a sev????
+	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	write(1, "BB\n", 3);
 	while (line != 0 && x < 1) // from the secon loop it segv
 	{
 		contents = ft_split(line, ' ');
