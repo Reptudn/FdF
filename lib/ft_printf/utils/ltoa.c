@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:01:21 by jkauker           #+#    #+#             */
-/*   Updated: 2023/10/23 10:22:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:10:08 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ltoa(long n)
 
 	_n = n;
 	if (n == 0)
-		return (ft_strdup("0"));
+		return (ft_strdup1("0"));
 	digits = get_digits(_n);
 	if (_n < 1)
 	{

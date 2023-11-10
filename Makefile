@@ -43,7 +43,7 @@ libmlx:
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
-$(NAME): $(OBJS) libft
+$(NAME): $(OBJS) libft ft_printf
 	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a ./lib/ft_printf/libftprintf.a $(HEADERS) -o $(NAME)
 
 clean:

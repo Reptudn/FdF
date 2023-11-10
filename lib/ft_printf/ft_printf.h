@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:17 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/25 10:20:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:09:35 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void		put_float(float num, int *writecount);
 void		put_pointer(void *ptr, int *writecount);
 
 // libft stuff
-char		*ft_itoa(int n);
+char		*ft_itoa1(int n);
 char		*ltoa(long n);
-char		*ft_strdup(const char *s);
+char		*ft_strdup1(const char *s);
 long		get_digits(long n);
 void		put_nb_in_str(long n, long digits, char *str);
 

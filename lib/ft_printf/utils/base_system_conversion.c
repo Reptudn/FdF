@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:02 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/23 16:15:53 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:10:28 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <limits.h>
 #include <unistd.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset1(void *b, int c, size_t len)
 {
 	size_t	i;
 
@@ -78,7 +78,7 @@ void	put_base(unsigned long num, int base, int capital, int *writecount)
 	i = 20;
 	if (num < 0)
 		num = -num;
-	ft_memset(buff, 'u', 21);
+	ft_memset1(buff, 'u', 21);
 	while (num > 0 && *writecount != -1)
 	{
 		n = (num % base);
@@ -107,7 +107,7 @@ void	put_base_hex(long long num, int base, int capital, int *writecount)
 	i = 20;
 	if (num < 0)
 		num = -num;
-	ft_memset(buff, 'u', 21);
+	ft_memset1(buff, 'u', 21);
 	while (num > 0 && *writecount != -1)
 	{
 		n = (num % base);

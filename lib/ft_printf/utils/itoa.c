@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:01:21 by jkauker           #+#    #+#             */
-/*   Updated: 2023/10/23 10:22:03 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:10:00 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup1(const char *s)
 {
 	int		i;
 	char	*dup;
@@ -67,7 +67,7 @@ void	put_nb_in_str(long n, long digits, char *str)
 	}
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa1(int n)
 {
 	char	*str;
 	int		digits;
@@ -75,7 +75,7 @@ char	*ft_itoa(int n)
 
 	_n = n;
 	if (n == 0)
-		return (ft_strdup("0"));
+		return (ft_strdup1("0"));
 	digits = get_digits(_n);
 	if (_n < 1)
 	{

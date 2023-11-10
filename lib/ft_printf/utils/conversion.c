@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:26:52 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/25 08:39:48 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 14:10:25 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	put_number(int num, int *writecount)
 {
 	char	*str;
 
-	str = ft_itoa(num);
+	str = ft_itoa1(num);
 	if (!str)
 	{
 		free(str);
