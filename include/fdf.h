@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 12:54:21 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 13:35:04 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,6 @@ typedef struct s_matrice
 	int				matrice[4][4];
 }				t_matrice;
 
-typedef struct s_line
-{
-	t_vector3	start;
-	t_vector3	end;
-}				t_line;
-
 typedef struct s_camera
 {
 	t_transform		transform;
@@ -123,6 +117,7 @@ typedef struct s_vars
 	short		run;
 	short		update;
 	void		*mlx;
+	mlx_image_t	*image;
 	int			window_width;
 	int			window_height;
 	t_map		*map;
@@ -156,7 +151,10 @@ int				get_b(int rgba);
 int				get_a(int rgba);
 
 // draw
-void			draw_line(t_line line);
+void			draw_line(t_vector2 start, t_vector2 end,
+					void *param, int color);
+void			draw_dot(t_vector2 middle_point,
+					unsigned int radius, void *param, int color);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
