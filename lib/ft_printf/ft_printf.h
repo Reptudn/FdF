@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:17 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/10 14:09:35 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:46:16 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <sys/_types/_va_list.h>
+// # include <sys/_types/_va_list.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <sys/types.h>
 
 //helper.c
 int			is_specifier(char identifier, char type);

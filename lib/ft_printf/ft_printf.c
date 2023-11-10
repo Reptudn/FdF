@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:09 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/25 11:15:51 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:46:42 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils/specifiers.h"
 #include "ft_printf.h"
 #include <limits.h>
-#include <sys/_types/_va_list.h>
 
 int	handle_percent(const char *str, int *i, int *writecount)
 {

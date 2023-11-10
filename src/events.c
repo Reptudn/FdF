@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 14:03:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 20:01:08 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	event_onmouse(mlx_key_data_t keycode, void *param)
 
 	ft_printf("[printf] Mouse Keycode: %d\n", keycode.key);
 	vars = (t_vars *)param;
-
+	vars->update = 1;
 }
 

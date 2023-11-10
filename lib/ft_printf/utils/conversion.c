@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:26:52 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/10 14:10:25 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:58:47 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <sys/_types/_intptr_t.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include "../ft_printf.h"
 
@@ -76,8 +76,6 @@ void	put_pointer(void *ptr, int *writecount)
 {
 	if (ptr == 0)
 		put_string("0x0", writecount);
-	else if ((unsigned long) ptr < 0)
-		put_base(ULLONG_MAX - (unsigned long) ptr, 16, 0, writecount);
 	else
 		put_base((unsigned long) ptr, 16, 0, writecount);
 }

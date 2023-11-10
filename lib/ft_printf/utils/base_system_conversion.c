@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_system_conversion.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:02 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/10 14:10:28 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:59:11 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	put_base(unsigned long num, int base, int capital, int *writecount)
 	int			i;
 
 	i = 20;
-	if (num < 0)
-		num = -num;
 	ft_memset1(buff, 'u', 21);
 	while (num > 0 && *writecount != -1)
 	{

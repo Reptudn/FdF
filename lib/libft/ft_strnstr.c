@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 01:22:58 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/10 11:36:16 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:56:33 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ static int	substrcmp(const char *s1, const char *s2, int start_index,
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	int		l_len;
 
 	i = 0;
-	l_len = 0;
 	if (get_length(little) < 1)
 		return ((char *)big);
 	while (big[i] != 0 && i < len)

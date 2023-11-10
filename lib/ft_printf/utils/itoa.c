@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   itoa.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:01:21 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 14:10:00 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 20:03:30 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen1(const char *s)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ char	*ft_strdup1(const char *s)
 	char	*dup;
 
 	i = 0;
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
+	dup = malloc((ft_strlen1(s) + 1) * sizeof(char));
 	if (!dup)
 		return (0);
 	while (s[i] != 0)

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 21:27:26 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/25 11:15:34 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:59:32 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <sys/_types/_va_list.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include "specifiers.h"

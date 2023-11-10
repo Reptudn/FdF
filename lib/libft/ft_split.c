@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:39:55 by jonask            #+#    #+#             */
-/*   Updated: 2023/10/16 16:15:47 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/10 19:53:17 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	the_split(int c, const char *s, char **strs, int i)
 	max = i;
 	word_count = 0;
 	i = 0;
-	while (*s && !(*s == c && s + 1 == 0) && word_count < max)
+	while (*s && !(*s == c && *(s + 1) == 0) && word_count < max)
 	{
 		i = 0;
 		while (*s == c)

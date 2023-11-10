@@ -21,7 +21,8 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)raycast.c \
 			$(SRCDIR)vector_to_2d_conversion.c \
 			$(SRCDIR)vector_utils.c \
-			$(SRCDIR)vector_utils2.c
+			$(SRCDIR)vector_utils2.c \
+			$(SRCDIR)color_utils.c
 
 OBJS	:= ${SRCS:.c=.o}
 
@@ -47,7 +48,7 @@ libmlx:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS) libft ft_printf get_next_line
-	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a ./lib/ft_printf/libftprintf.a ./lib/get_next_line/get_next_line.a $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a ./lib/ft_printf/libftprintf.a ./lib/get_next_line/get_next_line.a $(HEADERS) -o $(NAME) && printf "Compilation finished!\n"
 
 clean:
 	@make -C ./lib/libft clean
