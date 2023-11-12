@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 17:24:16 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/12 18:55:25 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_vector3	**get_map(int fd, t_vars *vars)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	while (line != 0 && x < 1) // from the secon loop it segv
+	while (line != 0)
 	{
 		contents = ft_split(line, ' ');
 		if (!contents)
@@ -86,18 +86,11 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		}
 		// vars->map->size_y = y; //segv
 		free(contents);
-		line = get_next_line(fd);
-		t_vector3 **temp = (t_vector3 **)realloc(map,
+		map = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (x + 2));
-		if (!temp)
-		{
-			free(map[x]);
-			free(map);
-			return (0);
-		}
-		map = temp;
-		map[x + 1] = 0;
-		write(1, "x++\n", 4);
+		map[y + 1] = 0;
+		line = get_next_line(fd);
+		write(1, "a\n", 2);
 		x++;
 	}
 	vars->map->size_x = x;

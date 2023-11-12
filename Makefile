@@ -63,4 +63,4 @@ fclean: clean
 	@make -C ./lib/get_next_line fclean
 	@rm -rf $(NAME)
 
-re: clean all
+re: fclean all
