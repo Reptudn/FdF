@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
+/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:17:38 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 16:23:03 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/12 19:14:48 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	debug_print_map(t_map map)
 		y = 0;
 		while (y < map.size_y)
 		{
-			ft_printf("%d ", map.points[x][y].z);
+			ft_printf("%d	", map.points[x][y].z);
 			y++;
 		}
 		ft_printf("\n");

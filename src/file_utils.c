@@ -6,7 +6,7 @@
 /*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/12 18:55:25 by jonask           ###   ########.fr       */
+/*   Updated: 2023/11/12 19:15:41 by jonask           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ t_vector3	**get_map(int fd, t_vars *vars)
 			free(map);
 			return (0);
 		}
+		map[count_words(line)] = 0;
 		y = 0;
+		printf("Map :  ");
 		while (contents[y] != 0)
 		{
 			if (ft_strchr(contents[y], ','))
@@ -82,18 +84,20 @@ t_vector3	**get_map(int fd, t_vars *vars)
 						ft_atoi(ft_split(contents[y], ',')[0]));
 			else
 				map[x][y] = convert_to_vector3(x, y, ft_atoi(contents[y]));
+			printf("%d	", map[x][y].z);
 			y++;
 		}
-		// vars->map->size_y = y; //segv
+		printf("\n");
 		free(contents);
 		map = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (x + 2));
 		map[y + 1] = 0;
 		line = get_next_line(fd);
-		write(1, "a\n", 2);
 		x++;
 	}
+	vars->map->size_y = y;
 	vars->map->size_x = x;
+	debug_print_map(*vars->map);
 	return (map);
 }
 
