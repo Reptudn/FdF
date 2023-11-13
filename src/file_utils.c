@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/13 10:15:29 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:38:39 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_vector3	**get_map(int fd, t_vars *vars)
 	int			y;
 
 	x = 0;
-	map = (t_vector3 **)malloc(sizeof(t_vector3 *));
+	map = (t_vector3 **)malloc(sizeof(t_vector3 **));
 	if (!map)
 		return (0);
 	line = get_next_line(fd);
@@ -74,7 +74,6 @@ t_vector3	**get_map(int fd, t_vars *vars)
 			free(map);
 			return (0);
 		}
-		map[count_words(line)] = 0;
 		y = 0;
 		printf("Map: ");
 		while (contents[y] != 0)
@@ -89,21 +88,16 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		}
 		printf("\n");
 		free(contents);
-		map = (t_vector3 **)realloc(map,
-				sizeof(t_vector3 *) * (x + 2));
-		if (!map)
-		{
-			write(1, "Error\n", 6);
-			return (0);
-		}
-		map[y + 1] = 0;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		map = (t_vector3 **)realloc(map,
+				sizeof(t_vector3 *) * (x + 2));
+		map[y + 1] = 0;
 		x++;
 	}
 	vars->map->size_y = y;
 	vars->map->size_x = x;
-	debug_print_map(*vars->map);
+	write(1, "a\n", 2);
 	return (map);
 }

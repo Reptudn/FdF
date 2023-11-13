@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 17:22:35 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/13 14:38:08 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	}
 	map.map_name = map_name;
 	map.points = get_map(fd, vars);
+	write(1, "b\n", 2);
 	map.transform.position = (t_vector3){0, 0, 0};
 	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	if (map.points == 0)
