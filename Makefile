@@ -45,7 +45,7 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<) \n"
 
 $(NAME): $(OBJS) libft ft_printf get_next_line
 	@$(CC) $(OBJS) $(LIBS) ./lib/libft/libft.a ./lib/ft_printf/libftprintf.a ./lib/get_next_line/get_next_line.a $(HEADERS) -o $(NAME) && printf "Compilation finished!\n"
