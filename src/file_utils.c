@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/13 14:38:39 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/15 12:12:52 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,38 @@ int	count_words(char *str)
 	return (count);
 }
 
+int	get_line_content(t_vars *vars, int x, int fd)
+{
+	int		y;
+	char	*line;
+	char	**line_content;
+
+	y = 0;
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	line_content = ft_split(line, ' ');
+	if (!line_content)
+		return (0);
+	while (line_content[y])
+	{
+		if (ft_strchr(line_content[y], ','))
+		{
+			vars->map->points[x][y] = convert_to_vector3(x, y,
+					ft_atoi(ft_split(line_content[y], ',')[0]));
+			vars->map->points[x][y].color = ft_split(line_content[y], ',')[1];
+		}
+		else
+		{
+			vars->map->points[x][y] = convert_to_vector3(x, y,
+					ft_atoi(line_content[y]));
+			vars->map->points[x][y].color = "white";
+		}
+		y++;
+	}
+	return (1);
+}
+
 t_vector3	**get_map(int fd, t_vars *vars)
 {
 	t_vector3	**map;
@@ -60,6 +92,12 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		return (0);
 	while (line != 0)
 	{
+		write(1, "d\n", 2);
+		if (*line == '\n' || *line == '\0')
+		{
+			write(1, "e\n", 2);
+			break ;
+		}
 		contents = ft_split(line, ' ');
 		if (!contents)
 		{
@@ -96,8 +134,8 @@ t_vector3	**get_map(int fd, t_vars *vars)
 		map[y + 1] = 0;
 		x++;
 	}
-	vars->map->size_y = y;
-	vars->map->size_x = x;
+	vars->map->size_y = 3;
+	vars->map->size_x = 3;
 	write(1, "a\n", 2);
 	return (map);
 }

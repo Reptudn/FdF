@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/13 14:38:08 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/15 12:10:36 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	}
 	map.map_name = map_name;
 	map.points = get_map(fd, vars);
-	write(1, "b\n", 2);
-	map.transform.position = (t_vector3){0, 0, 0};
+	map.transform.position = (t_vector3){0, 0, 0, 0};
 	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	if (map.points == 0)
 	{
@@ -47,22 +46,21 @@ void	register_hooks(void *param)
 
 void	gameloop(void *param)
 {
-	short		run;
-	short		update;
 	t_vars		*vars;
 
-	run = 1;
-	update = 0;
 	vars = (t_vars *)param;
+	vars->run = 1;
+	vars->update = 0;
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	map_draw(vars);
-	while (run == 1)
+	debug_log("Gameloop started");
+	while (vars->run == 1)
 	{
-		if (update == 0)
+		if (vars->update == 0)
 			continue ;
 		map_rotate(vars->map, (t_quaternion){0, 0, 0, 0});
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
 		map_draw(vars);
 		vars->update = 0;
@@ -89,7 +87,7 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	camera = camera_create((t_vector3){0, 0, 0},
+	camera = camera_create((t_vector3){0, 0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = &map;
 	vars.camera = &camera;

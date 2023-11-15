@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 16:23:16 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/15 11:51:26 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ typedef enum e_mousekeys
 
 typedef struct s_vector3
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
+	char	*color;
 }				t_vector3;
 
 typedef struct s_vector2
@@ -164,7 +165,7 @@ t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
 t_vector3		vector_substract(t_vector3 vec1, t_vector3 vec2);
 double			vector_distance(t_vector3 vec1, t_vector3 vec2);
 double			vector_length(t_vector3 vec);
-t_vector3		vector_new(int x, int y, int z);
+t_vector3		vector_new(int x, int y, int z, char *color);
 t_vector3		vector_rotate(t_vector3 vec, t_quaternion rot);
 t_quaternion	quaternion_add(t_quaternion quaternion1,
 					t_quaternion quaternion2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 20:01:08 by jonask           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:44:08 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	event_onkey(mlx_key_data_t keycode, void *param)
 	if (keycode.key == 53)
 		vars->run = 0;
 	else if (keycode.key == MLX_KEY_W)
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 1, 0},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 1, 0, "white"},
 			(t_quaternion){0, 0, 0, 0}});
 	else if (keycode.key == MLX_KEY_S)
-		camera_move(vars->camera, (t_transform){(t_vector3){0, -1, 0},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, -1, 0, "white"},
 			(t_quaternion){0, 0, 0, 0}});
 	vars->update = 1;
 }
@@ -48,4 +48,3 @@ void	event_onmouse(mlx_key_data_t keycode, void *param)
 	vars = (t_vars *)param;
 	vars->update = 1;
 }
-

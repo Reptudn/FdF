@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 11:26:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/15 11:51:01 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ double	vector_length(t_vector3 vec)
 	return (sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2)));
 }
 
-t_vector3	vector_new(int x, int y, int z)
+t_vector3	vector_new(int x, int y, int z, char *color)
 {
-	return ((t_vector3){x, y, z});
+	return ((t_vector3){x, y, z, color});
 }

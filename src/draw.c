@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 19:48:04 by jonask           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:28:53 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_line	initialize_line(t_vector2 start, t_vector2 end)
 	line.end = end;
 	line.dx = abs(end.x - start.x);
 	line.dy = abs(end.y - start.y);
-
 	if (start.x < end.x)
 		line.sx = 1;
 	else

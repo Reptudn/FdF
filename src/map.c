@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonask <jonask@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/12 18:36:32 by jonask           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:50:32 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	map_draw(void *param)
 		while (y < vars->map->size_y)
 		{
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
-					y, vars->map->points[y][x].z},
+					y, vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera);
 			draw_dot(last_point, 10, param, 155);
 			y++;
