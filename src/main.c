@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 11:41:43 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 13:45:27 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,24 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	return (map);
 }
 
-void	register_hooks(void *param)
-{
-	t_vars	*vars;
-
-	vars = (t_vars *)param;
-	mlx_key_hook(vars->mlx, event_onkey, param);
-	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
-	mlx_resize_hook(vars->mlx, event_onresize, param);
-	mlx_loop(vars->mlx);
-}
-
 void	gameloop(void *param)
 {
 	t_vars		*vars;
+
+	vars = (t_vars *)param;
+	
+	if (vars->update == 0 || vars->run == 0)
+			return ;
+	map_rotate(vars->map, (t_quaternion){0, 0, 0, 0});
+	camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
+		(t_quaternion){0, 0, 0, 0}});
+	map_draw(vars);
+	vars->update = 0;
+}
+
+void	register_hooks(void *param)
+{
+	t_vars	*vars;
 
 	vars = (t_vars *)param;
 	vars->run = 1;
@@ -56,21 +60,11 @@ void	gameloop(void *param)
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	map_draw(vars);
-	debug_log("Gameloop started");
-	printf("Run: %d\n", vars->run);
-	printf("Update: %d\n", vars->update);
-	register_hooks(param);
-	while (vars->run == 1)
-	{
-		if (vars->update == 0)
-			continue ;
-		map_rotate(vars->map, (t_quaternion){0, 0, 0, 0});
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
-			(t_quaternion){0, 0, 0, 0}});
-		map_draw(vars);
-		vars->update = 0;
-	}
-	debug_log("Gameloop ended");
+	mlx_key_hook(vars->mlx, event_onkey, param);
+	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
+	mlx_resize_hook(vars->mlx, event_onresize, param);
+	mlx_loop_hook(vars->mlx, gameloop, param);
+	mlx_loop(vars->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -92,11 +86,12 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	camera = camera_create((t_vector3){0, 0, 0, 0},
+	camera = camera_create((t_vector3){200, 300, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = &map;
 	vars.camera = &camera;
-	gameloop(&vars);
+	register_hooks(&vars);
+	//gameloop(&vars);
 	mlx_terminate(vars.mlx);
 	return (RUN_SUCCESS);
 }

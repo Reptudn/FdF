@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 11:29:45 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 13:17:32 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int				get_r(int rgba);
 int				get_g(int rgba);
 int				get_b(int rgba);
 int				get_a(int rgba);
+int				get_rgba(int r, int g, int b, int a);
 
 // draw
 void			draw_line(t_vector2 start, t_vector2 end,

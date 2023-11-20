@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 11:31:56 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:24:11 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 			return (0);
 		}
 		y = 0;
-		printf("Map: ");
 		while (contents[y] != 0)
 		{
 			if (ft_strchr(contents[y], ','))
@@ -120,10 +119,8 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 						ft_atoi(ft_split(contents[y], ',')[0]));
 			else
 				map[x][y] = convert_to_vector3(x, y, ft_atoi(contents[y]));
-			printf("%d	", map[x][y].z);
 			y++;
 		}
-		printf("\n");
 		free(contents);
 		line = get_next_line(fd);
 		if (!line)
