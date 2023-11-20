@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 13:17:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:18:14 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,18 +126,20 @@ typedef struct s_vars
 	int			window_height;
 	t_map		*map;
 	t_camera	*camera;
+	int			draw_size;
 }				t_vars;
 
 t_vector3		**get_map(int fd, t_map *map_struct);
 
 // map
-void			map_rotate(t_map *map, t_quaternion rot);
+void 			map_rotate(t_map *map, double angle);
 void			map_draw(void *param);
 
 // events
 void			event_onresize(int x, int y, void *param);
 void			event_onkey(mlx_key_data_t keycode, void *param);
 void			event_onmouse(mlx_key_data_t keycode, void *param);
+void			event_onscroll(double xdelta, double ydelta, void *param);
 
 // vector to 2d conversion
 t_vector2		get_screen_coordinates(t_transform transform, t_camera *camera);
@@ -175,6 +177,7 @@ double			quaternion_dotprod(t_quaternion quaternion1,
 double			quaternion_angle_between(t_quaternion quaternion1,
 					t_quaternion quaternion2);
 t_quaternion	quaternion_new(int x, int y, int z, int w);
+double			quaternion_to_radian(t_quaternion degrees);
 
 // raycast
 int				is_visible_to_camera(t_camera *cam, t_vector3 *point);

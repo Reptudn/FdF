@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 13:52:21 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:22:34 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,49 @@ void	event_onkey(mlx_key_data_t keycode, void *param)
 {
 	t_vars	*vars;
 
-	ft_printf("[printf] Key Keycode: %d\n", keycode.key);
+	ft_printf("Key Keycode: %d\n", keycode.key);
 	vars = (t_vars *)param;
-	if (keycode.key == 53)
+	if (keycode.key == 256)
+	{
 		vars->run = 0;
+		exit(0);
+	}
 	else if (keycode.key == MLX_KEY_W)
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 5, 0, "white"},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, (5 * vars->draw_size), 0, "white"},
 			(t_quaternion){0, 0, 0, 0}});
 	else if (keycode.key == MLX_KEY_S)
-		camera_move(vars->camera, (t_transform){(t_vector3){0, -5, 0, "white"},
-			(t_quaternion){0, 0, 0, 0}});
-	else if (keycode.key == MLX_KEY_A)
-		camera_move(vars->camera, (t_transform){(t_vector3){-5, 0, 0, "white"},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, -(5 * vars->draw_size), 0, "white"},
 			(t_quaternion){0, 0, 0, 0}});
 	else if (keycode.key == MLX_KEY_D)
-		camera_move(vars->camera, (t_transform){(t_vector3){5, 0, 0, "white"},
+		camera_move(vars->camera, (t_transform){(t_vector3){-(5 * vars->draw_size), 0, 0, "white"},
 			(t_quaternion){0, 0, 0, 0}});
+	else if (keycode.key == MLX_KEY_A)
+		camera_move(vars->camera, (t_transform){(t_vector3){(5 * vars->draw_size), 0, 0, "white"},
+			(t_quaternion){0, 0, 0, 0}});
+	else if (keycode.key == MLX_KEY_Q)
+		vars->map->transform.rotation.w += 100;
 	vars->update = 1;
+}
+
+void	event_onscroll(double xdelta, double ydelta, void *param)
+{
+	t_vars	*vars;
+	double	zoom_factor;
+
+	zoom_factor = 5.0;
+	vars = (t_vars *)param;
+	vars->update = 1;
+	if (ydelta > 0)
+	{
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, zoom_factor, "white"},
+			(t_quaternion){0, 0, 0, 0}});
+	}
+	else if (ydelta < 0)
+	{
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, -zoom_factor, "white"},
+			(t_quaternion){0, 0, 0, 0}});
+	}
+	xdelta++;
 }
 
 void	event_onmouse(mlx_key_data_t keycode, void *param)

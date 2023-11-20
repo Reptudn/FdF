@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 12:00:52 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:12:25 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
 {
 	int		e2;
 	t_line	line;
+	t_vars	*vars;
 
+	vars = (t_vars *)param;
 	line = initialize_line(start, end);
 	while (1)
 	{
-		draw_dot((t_vector2){line.start.x, line.start.y}, 10, param, color);
+		draw_dot((t_vector2){line.start.x, line.start.y}, 1, param, color);
 		if (line.start.x == line.end.x && line.start.y == line.end.y)
 			break ;
 		e2 = line.err;

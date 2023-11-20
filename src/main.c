@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 13:45:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:19:59 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	gameloop(void *param)
 	
 	if (vars->update == 0 || vars->run == 0)
 			return ;
-	map_rotate(vars->map, (t_quaternion){0, 0, 0, 0});
-	camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
-		(t_quaternion){0, 0, 0, 0}});
 	map_draw(vars);
 	vars->update = 0;
 }
@@ -59,11 +56,13 @@ void	register_hooks(void *param)
 	vars->update = 0;
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
+	vars->draw_size = 5;
 	map_draw(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
 	mlx_resize_hook(vars->mlx, event_onresize, param);
 	mlx_loop_hook(vars->mlx, gameloop, param);
+	mlx_scroll_hook(vars->mlx, event_onscroll, param);
 	mlx_loop(vars->mlx);
 }
 

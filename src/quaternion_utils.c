@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:50 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/10 11:26:24 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:17:24 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ double	quaternion_angle_between(t_quaternion quaternion1,
 t_quaternion	quaternion_new(int x, int y, int z, int w)
 {
 	return ((t_quaternion){x, y, z, w});
+}
+
+double	quaternion_to_radian(t_quaternion degrees)
+{
+	return (2 * acos(degrees.w));
 }
