@@ -6,11 +6,12 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/15 12:10:36 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:41:43 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <unistd.h>
 
 t_map	create_map(char *map_name, int fd, t_vars *vars)
 {
@@ -22,7 +23,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 		exit(1);
 	}
 	map.map_name = map_name;
-	map.points = get_map(fd, vars);
+	map.points = get_map(fd, &map);
 	map.transform.position = (t_vector3){0, 0, 0, 0};
 	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	if (map.points == 0)
@@ -30,6 +31,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 		debug_error("Could not create map");
 		exit(1);
 	}
+	vars->map = &map;
 	return (map);
 }
 
@@ -55,6 +57,9 @@ void	gameloop(void *param)
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	map_draw(vars);
 	debug_log("Gameloop started");
+	printf("Run: %d\n", vars->run);
+	printf("Update: %d\n", vars->update);
+	register_hooks(param);
 	while (vars->run == 1)
 	{
 		if (vars->update == 0)

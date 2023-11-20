@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/15 11:51:26 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:29:45 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef struct s_vars
 	t_camera	*camera;
 }				t_vars;
 
-t_vector3		**get_map(int fd, t_vars *vars);
+t_vector3		**get_map(int fd, t_map *map_struct);
 
 // map
 void			map_rotate(t_map *map, t_quaternion rot);
