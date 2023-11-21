@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 12:44:41 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:09:12 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point)
 					vars->map->points[y][x - 1].y, vars->map->points[y][x - 1].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera),
 					vars, get_rgba(0, 255, 0, 255));
-	if (x + 1 < vars->map->size_y)
+	if (x + 1 < vars->map->size_x)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x + 1].x,
 					vars->map->points[y][x + 1].y, vars->map->points[y][x + 1].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera),
@@ -136,7 +136,7 @@ void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point)
 					vars->map->points[y - 1][x].y, vars->map->points[y - 1][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera),
 					vars, get_rgba(0, 255, 0, 255));
-	if (y + 1 < vars->map->size_x)
+	if (y + 1 < vars->map->size_y)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y + 1][x].x,
 					vars->map->points[y + 1][x].y, vars->map->points[y + 1][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera),
