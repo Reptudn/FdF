@@ -6,11 +6,12 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 15:03:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:23:10 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdlib.h>
 
 t_vector3	convert_to_vector3(int x, int y, int z)
 {
@@ -43,42 +44,43 @@ int	count_words(char *str)
 	return (count);
 }
 
-int	get_line_content(t_vars *vars, int x, int fd)
-{
-	int		y;
-	char	*line;
-	char	**line_content;
+// int	get_line_content(t_vars *vars, int x, int fd)
+// {
+// 	int		y;
+// 	char	*line;
+// 	char	**line_content;
 
-	y = 0;
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	line_content = ft_split(line, ' ');
-	if (!line_content)
-		return (0);
-	while (line_content[y])
-	{
-		if (ft_strchr(line_content[y], ','))
-		{
-			vars->map->points[x][y] = convert_to_vector3(x, y,
-					ft_atoi(ft_split(line_content[y], ',')[0]));
-			vars->map->points[x][y].color = ft_split(line_content[y], ',')[1];
-		}
-		else
-		{
-			vars->map->points[x][y] = convert_to_vector3(x, y,
-					ft_atoi(line_content[y]));
-			vars->map->points[x][y].color = "white";
-		}
-		y++;
-	}
-	return (1);
-}
+// 	y = 0;
+// 	line = get_next_line(fd);
+// 	if (!line)
+// 		return (0);
+// 	line_content = ft_split(line, ' ');
+// 	if (!line_content)
+// 		return (0);
+// 	while (line_content[y])
+// 	{
+// 		if (ft_strchr(line_content[y], ','))
+// 		{
+// 			vars->map->points[x][y] = convert_to_vector3(x, y,
+// 					ft_atoi(ft_split(line_content[y], ',')[0]));
+// 			vars->map->points[x][y].color = ft_split(line_content[y], ',')[1];
+// 		}
+// 		else
+// 		{
+// 			vars->map->points[x][y] = convert_to_vector3(x, y,
+// 					ft_atoi(line_content[y]));
+// 			vars->map->points[x][y].color = "white";
+// 		}
+// 		y++;
+// 	}
+// 	return (1);
+// }
 
 t_vector3	**get_map(int fd, t_map *map_struct)
 {
 	t_vector3	**map;
 	char		**contents;
+	t_vector3	**tmp;
 	char		*line;
 	int			x;
 	int			y;
@@ -90,52 +92,71 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 	line = get_next_line(fd);
 	if (!line)
 	{
-		free(map);
+		// free(map);
 		return (0);
 	}
 	while (line != 0)
 	{
 		if (*line == '\n' || *line == '\0')
 		{
-			write(1, "e\n", 2);
+			// free(line);
 			break ;
 		}
 		contents = ft_split(line, ' ');
 		if (!contents)
 		{
-			free(map);
+			// free(line);
+			// free(map);
 			return (0);
 		}
 		map[x] = (t_vector3 *)malloc(sizeof(t_vector3)
 				* (count_words(line) + 1));
 		if (!map[x])
 		{
-			free(contents);
-			free(map);
+			// free(contents);
+			// while(--x)
+			// 	free(map[x]);
+			// free(map);
+			// free(line);
 			return (0);
 		}
 		y = 0;
 		while (contents[y] != 0)
 		{
 			if (ft_strchr(contents[y], ','))
+			{
+				char **value_color = ft_split(contents[y], ',');
+				if (!value_color)
+				{
+					// free(contents);
+					// while(--x)
+					// 	free(map[x]);
+					// free(map);
+					// free(line);
+					return (0);
+				}
 				map[x][y] = convert_to_vector3(x, y,
-						ft_atoi(ft_split(contents[y], ',')[0]));
+						ft_atoi(value_color[0]));
+				map[x][y].color = value_color[1];
+			}
 			else
 				map[x][y] = convert_to_vector3(x, y, ft_atoi(contents[y]));
 			y++;
 		}
-		map_struct->size_y = count_words(line) - 1;
+		map_struct->size_x = count_words(line);
 		free(contents);
+		free(line);
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		map = (t_vector3 **)realloc(map,
+		tmp = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (x + 2));
+		// free(map);
+		map = tmp;
+		// free(tmp);
 		map[y + 1] = 0;
 		x++;
 	}
-	//map_struct->size_x = x - 1;
-	map_struct->size_x = 10;
-	map_struct->size_x = 10;
+	map_struct->size_y = x;
 	return (map);
 }

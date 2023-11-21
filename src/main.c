@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 15:19:59 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:15:05 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	}
 	map.map_name = map_name;
 	map.points = get_map(fd, &map);
-	map.transform.position = (t_vector3){0, 0, 0, 0};
-	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	if (map.points == 0)
 	{
 		debug_error("Could not create map");
 		exit(1);
 	}
+	map.transform.position = (t_vector3){0, 0, 0, 0};
+	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = &map;
 	return (map);
 }
@@ -43,7 +43,9 @@ void	gameloop(void *param)
 	
 	if (vars->update == 0 || vars->run == 0)
 			return ;
+	mlx_delete_image(vars->mlx, vars->image);
 	map_draw(vars);
+	update_window_ui(vars);
 	vars->update = 0;
 }
 
@@ -58,6 +60,7 @@ void	register_hooks(void *param)
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 5;
 	map_draw(vars);
+	update_window_ui(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
 	mlx_resize_hook(vars->mlx, event_onresize, param);
@@ -90,7 +93,6 @@ int	main(int argc, char **argv)
 	vars.map = &map;
 	vars.camera = &camera;
 	register_hooks(&vars);
-	//gameloop(&vars);
 	mlx_terminate(vars.mlx);
 	return (RUN_SUCCESS);
 }

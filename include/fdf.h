@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 15:18:14 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:33:57 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,8 @@ int				get_a(int rgba);
 int				get_rgba(int r, int g, int b, int a);
 
 // draw
-void			draw_line(t_vector2 start, t_vector2 end,
-					void *param, int color);
+void			draw_line_to_neighbours(t_vars *vars,
+					t_vector2 curr_point);
 void			draw_dot(t_vector2 middle_point,
 					int radius, void *param, int color);
 
@@ -181,6 +181,9 @@ double			quaternion_to_radian(t_quaternion degrees);
 
 // raycast
 int				is_visible_to_camera(t_camera *cam, t_vector3 *point);
+
+// ui
+void			update_window_ui(t_vars *vars);
 
 // debug
 void			debug_error(char *error_msg);

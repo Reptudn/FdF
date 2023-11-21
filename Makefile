@@ -22,7 +22,8 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)vector_to_2d_conversion.c \
 			$(SRCDIR)vector_utils.c \
 			$(SRCDIR)vector_utils2.c \
-			$(SRCDIR)color_utils.c
+			$(SRCDIR)color_utils.c \
+			$(SRCDIR)window_ui.c
 
 OBJS	:= ${SRCS:.c=.o}
 
