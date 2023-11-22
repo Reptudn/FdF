@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 12:33:57 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:19:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_vector3
 	int		x;
 	int		y;
 	int		z;
-	char	*color;
+	int		color;
 }				t_vector3;
 
 typedef struct s_vector2
@@ -100,6 +100,11 @@ typedef struct s_matrice
 {
 	int				matrice[4][4];
 }				t_matrice;
+
+typedef struct s_3x3matrice
+{
+	int				matrice[3][3];
+}				t_3x3matrice;
 
 typedef struct s_camera
 {
@@ -134,6 +139,7 @@ t_vector3		**get_map(int fd, t_map *map_struct);
 // map
 void 			map_rotate(t_map *map, double angle);
 void			map_draw(void *param);
+void			map_draw_new(void *param);
 
 // events
 void			event_onresize(int x, int y, void *param);
@@ -144,13 +150,15 @@ void			event_onscroll(double xdelta, double ydelta, void *param);
 // vector to 2d conversion
 t_vector2		get_screen_coordinates(t_transform transform, t_camera *camera);
 
+t_vector2		to_screen(t_vector3 point, t_vars *vars);
+
 // camera
 void			camera_move(t_camera *cam, t_transform transform);
 t_camera		camera_create(t_vector3 position, t_quaternion rotation,
 					double fov);
 
 // color utils
-// int				get_rgba(int r, int g, int b, int a);
+int				hex_to_color(char *str);
 int				get_r(int rgba);
 int				get_g(int rgba);
 int				get_b(int rgba);
@@ -168,7 +176,7 @@ t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
 t_vector3		vector_substract(t_vector3 vec1, t_vector3 vec2);
 double			vector_distance(t_vector3 vec1, t_vector3 vec2);
 double			vector_length(t_vector3 vec);
-t_vector3		vector_new(int x, int y, int z, char *color);
+t_vector3		vector_new(int x, int y, int z, int color);
 t_vector3		vector_rotate(t_vector3 vec, t_quaternion rot);
 t_quaternion	quaternion_add(t_quaternion quaternion1,
 					t_quaternion quaternion2);
@@ -178,6 +186,7 @@ double			quaternion_angle_between(t_quaternion quaternion1,
 					t_quaternion quaternion2);
 t_quaternion	quaternion_new(int x, int y, int z, int w);
 double			quaternion_to_radian(t_quaternion degrees);
+t_matrice		matrice_multiply(t_matrice matrice1, t_matrice matrice2);
 
 // raycast
 int				is_visible_to_camera(t_camera *cam, t_vector3 *point);

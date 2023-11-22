@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:41 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/20 13:24:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 10:29:35 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,13 @@ t_vector2	get_screen_coordinates(t_transform transform, t_camera *camera)
 		+ matrice.matrice[2][1] * transform.position.y
 		+ matrice.matrice[2][2] * transform.position.z
 		+ matrice.matrice[2][3];
-	if (perspective != 0.0f)
+	if (perspective > 0.1f || perspective < 1000.0f)
 	{
-		coordinates.x /= perspective;
-		coordinates.y /= perspective;
+		coordinates.x /= perspective / 2;
+		coordinates.y /= perspective / 2;
+	} else {
+		coordinates.x = -1;
+		coordinates.y = -1;
 	}
 	//printf("Coordinates: %d, %d\n", coordinates.x, coordinates.y);
 	return (coordinates);

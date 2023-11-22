@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 12:23:10 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 09:51:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,24 +128,27 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 				char **value_color = ft_split(contents[y], ',');
 				if (!value_color)
 				{
-					// free(contents);
-					// while(--x)
-					// 	free(map[x]);
-					// free(map);
-					// free(line);
+					free(contents);
+					while(--x)
+						free(map[x]);
+					free(map);
+					free(line);
 					return (0);
 				}
 				map[x][y] = convert_to_vector3(x, y,
 						ft_atoi(value_color[0]));
-				map[x][y].color = value_color[1];
+				map[x][y].color = hex_to_color(value_color[1]);
 			}
 			else
+			{
 				map[x][y] = convert_to_vector3(x, y, ft_atoi(contents[y]));
+				map[x][y].color = hex_to_color("0xFFFFFF");
+			}
 			y++;
 		}
 		map_struct->size_x = count_words(line);
-		free(contents);
-		free(line);
+		// free(contents);
+		// free(line);
 		line = get_next_line(fd);
 		if (!line)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 12:15:05 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:33:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	gameloop(void *param)
 			return ;
 	mlx_delete_image(vars->mlx, vars->image);
 	map_draw(vars);
+	// map_draw_new(vars);
 	update_window_ui(vars);
 	vars->update = 0;
 }
@@ -60,6 +61,7 @@ void	register_hooks(void *param)
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 5;
 	map_draw(vars);
+	// map_draw_new(vars);
 	update_window_ui(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
