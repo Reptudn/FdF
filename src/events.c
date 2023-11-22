@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 12:22:00 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:35:10 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	event_onkey(mlx_key_data_t keycode, void *param)
 		map_move((t_vector3){50, 0, 0 , 0}, vars->map);
 	if (keycode.key == MLX_KEY_L)
 		map_move((t_vector3){-50, 0, 0 , 0}, vars->map);
+	if (keycode.key == MLX_KEY_SPACE && keycode.action == MLX_PRESS)
+		vars->draw_line = !vars->draw_line;
 	vars->update = 1;
 }
 
@@ -72,16 +74,21 @@ void	event_onscroll(double xdelta, double ydelta, void *param)
 
 	zoom_factor = 1.5;
 	vars = (t_vars *)param;
-	vars->update = 1;
 	if (ydelta < 0)
 	{
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, zoom_factor, 0},
+		if (vars->camera->transform.position.x - zoom_factor < 0)
+			return ;
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, -zoom_factor, 0},
 			(t_quaternion){0, 0, 0, 0}});
+		// map_move((t_vector3){0, 0, zoom_factor , 0}, vars->map);
+		// vars->draw_size += 0.1;
 	}
 	else if (ydelta > 0)
 	{
-		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, -zoom_factor, 0},
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, zoom_factor, 0},
 			(t_quaternion){0, 0, 0, 0}});
+		// map_move((t_vector3){0, 0, -zoom_factor , 0}, vars->map);
+		// vars->draw_size -= 0.1;
 	}
 	if (xdelta > 0)
 	{
@@ -93,6 +100,7 @@ void	event_onscroll(double xdelta, double ydelta, void *param)
 		camera_move(vars->camera, (t_transform){(t_vector3){zoom_factor, 0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
 	}
+	vars->update = 1;
 }
 
 void	event_onmouse(mlx_key_data_t keycode, void *param)

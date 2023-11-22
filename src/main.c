@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 12:26:31 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:32:40 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(int argc, char **argv)
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = &map;
 	vars.camera = &camera;
+	vars.draw_line = 0;
 	register_hooks(&vars);
 	mlx_terminate(vars.mlx);
 	return (RUN_SUCCESS);

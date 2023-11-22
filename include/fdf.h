@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 12:26:46 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:32:46 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_vars
 	t_map		*map;
 	t_camera	*camera;
 	int			draw_size;
+	int			draw_line;
 }				t_vars;
 
 t_vector3		**get_map(int fd, t_map *map_struct);
@@ -169,8 +170,8 @@ int				get_a(int rgba);
 int				get_rgba(int r, int g, int b, int a);
 
 // draw
-void			draw_line_to_neighbours(t_vars *vars,
-					t_vector2 curr_point);
+void			draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point,
+					int x, int y);
 void			draw_dot(t_vector2 middle_point,
 					int radius, void *param, int color);
 

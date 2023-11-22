@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 12:32:09 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:40:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,13 @@ void	map_draw(void *param)
 					(t_quaternion){0, 0, 0, 0}}, vars->camera);
 			last_point.x += (vars->window_width / 2) + x * 10 + vars->map->transform.position.x;
 			last_point.y += (vars->window_height / 2) + y * 10  + vars->map->transform.position.y;
-			draw_dot(last_point, 3, param, vars->map->points[y][x].color);
+			if (last_point.x >= -100 && last_point.x < vars->window_width + 100
+					&& last_point.y >= -100 && last_point.y < vars->window_height + 100)
+			{
+				if (vars->draw_line == 1)
+					draw_line_to_neighbours(vars, last_point, x, y);
+				draw_dot(last_point, vars->draw_size, param, vars->map->points[y][x].color);
+			}
 		}
 		x++;
 	}

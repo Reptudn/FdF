@@ -6,11 +6,12 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 13:09:12 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:39:03 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdio.h>
 
 typedef struct s_line
 {
@@ -114,13 +115,13 @@ void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
 	}
 }
 
-void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point)
+void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point, int x, int y)
 {
-	int	x;
-	int	y;
+	int	xs;
+	int	ys;
 
-	x = curr_point.x;
-	y = curr_point.y;
+	xs = (vars->window_width / 2) + x * 10 + vars->map->transform.position.x;
+	ys = (vars->window_height / 2) + y * 10  + vars->map->transform.position.y;
 	if (x - 1 >= 0)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x - 1].x,
 					vars->map->points[y][x - 1].y, vars->map->points[y][x - 1].z, 0},
