@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:41 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/22 10:29:35 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:16:50 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ t_vector2	get_screen_coordinates(t_transform transform, t_camera *camera)
 	projection = (t_matrice){0};
 	matrice = (t_matrice){0};
 	point_to_matrice(transform, &matrice);
-	point_to_matrice(camera->transform, &matrice);
-	//matrice = matrice_multiply(matrice, projection);
+	point_to_matrice(camera->transform, &projection);
+	matrice = matrice_multiply(matrice, projection);
 	coordinates.x = matrice.matrice[0][0] * transform.position.x
 		+ matrice.matrice[0][1] * transform.position.y
 		+ matrice.matrice[0][2] * transform.position.z + matrice.matrice[0][3];
@@ -113,10 +113,10 @@ t_vector2	get_screen_coordinates(t_transform transform, t_camera *camera)
 		+ matrice.matrice[2][1] * transform.position.y
 		+ matrice.matrice[2][2] * transform.position.z
 		+ matrice.matrice[2][3];
-	if (perspective > 0.1f || perspective < 1000.0f)
+	if (perspective != 0)
 	{
-		coordinates.x /= perspective / 2;
-		coordinates.y /= perspective / 2;
+		coordinates.x /= perspective;
+		coordinates.y /= perspective;
 	} else {
 		coordinates.x = -1;
 		coordinates.y = -1;

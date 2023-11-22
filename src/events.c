@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 10:16:52 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:22:00 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,35 @@ void	event_onkey(mlx_key_data_t keycode, void *param)
 		vars->run = 0;
 		exit(0);
 	}
-	else if (keycode.key == MLX_KEY_W)
+	if (keycode.key == MLX_KEY_W)
 		camera_move(vars->camera, (t_transform){(t_vector3){0, 50, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
-	else if (keycode.key == MLX_KEY_S)
+	if (keycode.key == MLX_KEY_S)
 		camera_move(vars->camera, (t_transform){(t_vector3){0,  -50, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
-	else if (keycode.key == MLX_KEY_D)
+	if (keycode.key == MLX_KEY_D)
 		camera_move(vars->camera, (t_transform){(t_vector3){-50, 0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
-	else if (keycode.key == MLX_KEY_A)
+	if (keycode.key == MLX_KEY_A)
 		camera_move(vars->camera, (t_transform){(t_vector3){50, 0, 0, 0},
 			(t_quaternion){0, 0, 0, 0}});
-	else if (keycode.key == MLX_KEY_R)
+	if (keycode.key == MLX_KEY_R)
 		vars->camera->transform = (t_transform){(t_vector3){200, 300, 0, 0},
 			(t_quaternion){0, 0, 0, 0}};
-	else if (keycode.key == MLX_KEY_Q)
+	if (keycode.key == MLX_KEY_Q)
 		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
 			(t_quaternion){0, 10, 0, 10}});
-	else if (keycode.key == MLX_KEY_E)
+	if (keycode.key == MLX_KEY_E)
 		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
 			(t_quaternion){0, -10, 0, -10}});
+	if (keycode.key == MLX_KEY_I)
+		map_move((t_vector3){0, 50, 0 , 0}, vars->map);
+	if (keycode.key == MLX_KEY_K)
+		map_move((t_vector3){0, -50, 0 , 0}, vars->map);
+	if (keycode.key == MLX_KEY_J)
+		map_move((t_vector3){50, 0, 0 , 0}, vars->map);
+	if (keycode.key == MLX_KEY_L)
+		map_move((t_vector3){-50, 0, 0 , 0}, vars->map);
 	vars->update = 1;
 }
 

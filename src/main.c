@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 11:33:33 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:26:31 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	gameloop(void *param)
 			return ;
 	mlx_delete_image(vars->mlx, vars->image);
 	map_draw(vars);
-	// map_draw_new(vars);
 	update_window_ui(vars);
+	debug_draw_info(vars);
 	vars->update = 0;
 }
 

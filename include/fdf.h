@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 11:19:37 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:26:46 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ typedef struct s_3x3matrice
 typedef struct s_camera
 {
 	t_transform		transform;
+	float			near;
+	float			far;
 	double			fov;
 }				t_camera;
 
@@ -139,6 +141,7 @@ t_vector3		**get_map(int fd, t_map *map_struct);
 // map
 void 			map_rotate(t_map *map, double angle);
 void			map_draw(void *param);
+void			map_move(t_vector3 position, t_map *map);
 void			map_draw_new(void *param);
 
 // events
@@ -198,5 +201,6 @@ void			update_window_ui(t_vars *vars);
 void			debug_error(char *error_msg);
 void			debug_log(char *log_msg);
 void			debug_print_map(t_map map);
+void			debug_draw_info(t_vars *vars);
 
 #endif

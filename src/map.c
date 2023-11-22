@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 11:32:43 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:32:09 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void map_rotate(t_map *map, double angle)
     }
 }
 
+void	map_move(t_vector3 position, t_map *map)
+{
+	map->transform.position = vector_add(map->transform.position, position);
+}
+
 void	map_draw(void *param)
 {
 	int					x;
@@ -69,8 +74,8 @@ void	map_draw(void *param)
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
 					y, vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera);
-			last_point.x += (vars->window_width / 2) + x * 10;
-			last_point.y += (vars->window_height / 2) + y * 10;
+			last_point.x += (vars->window_width / 2) + x * 10 + vars->map->transform.position.x;
+			last_point.y += (vars->window_height / 2) + y * 10  + vars->map->transform.position.y;
 			draw_dot(last_point, 3, param, vars->map->points[y][x].color);
 		}
 		x++;
