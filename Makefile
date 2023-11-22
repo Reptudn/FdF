@@ -25,7 +25,8 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)color_utils.c \
 			$(SRCDIR)window_ui.c \
 			$(SRCDIR)hex_to_color.c \
-			$(SRCDIR)3x3matrice_projection.c
+			$(SRCDIR)3x3matrice_projection.c \
+			$(SRCDIR)isometric.c \
 
 OBJS	:= ${SRCS:.c=.o}
 

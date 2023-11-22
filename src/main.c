@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 13:32:40 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 15:12:04 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	gameloop(void *param)
 	if (vars->update == 0 || vars->run == 0)
 			return ;
 	mlx_delete_image(vars->mlx, vars->image);
-	map_draw(vars);
+	// map_draw(vars);
+	map_draw_isometric(param);
 	update_window_ui(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
@@ -60,7 +61,8 @@ void	register_hooks(void *param)
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 5;
-	map_draw(vars);
+	map_draw_isometric(param);
+	// map_draw(vars);
 	// map_draw_new(vars);
 	update_window_ui(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);

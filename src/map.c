@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 13:40:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 14:54:54 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,31 @@ void	map_draw_new(void *param)
 		while (++y < vars->map->size_y)
 		{
 			last_point = to_screen(vars->map->points[y][x], vars);
+			draw_dot(last_point, 3, param, vars->map->points[y][x].color);
+		}
+		x++;
+	}
+	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
+}
+
+void	map_draw_isometric(void *param)
+{
+	int					x;
+	int					y;
+	t_vector2			last_point;
+	t_vars				*vars;
+
+	x = 0;
+	y = 0;
+	vars = (t_vars *)param;
+	vars->image = mlx_new_image(vars->mlx, vars->window_width,
+			vars->window_height);
+	while (x < vars->map->size_x)
+	{
+		y = -1;
+		while (++y < vars->map->size_y)
+		{
+			last_point = isometric_projection(vars->map->points[y][x], vars);
 			draw_dot(last_point, 3, param, vars->map->points[y][x].color);
 		}
 		x++;

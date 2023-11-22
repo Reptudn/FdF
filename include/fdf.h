@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 13:32:46 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/22 14:54:44 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,9 @@ void			debug_error(char *error_msg);
 void			debug_log(char *log_msg);
 void			debug_print_map(t_map map);
 void			debug_draw_info(t_vars *vars);
+
+// projection
+t_vector2 		isometric_projection(t_vector3 input, t_vars *fdf);
+void			map_draw_isometric(void *param);
 
 #endif
