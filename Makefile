@@ -11,22 +11,23 @@ LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCDIR := ./src/
 
 SRCS	:=  $(SRCDIR)camera.c \
-			$(SRCDIR)debug.c \
-			$(SRCDIR)draw.c \
-			$(SRCDIR)events.c \
-			$(SRCDIR)file_utils.c \
 			$(SRCDIR)main.c \
 			$(SRCDIR)map.c \
-			$(SRCDIR)quaternion_utils.c \
-			$(SRCDIR)raycast.c \
-			$(SRCDIR)vector_to_2d_conversion.c \
-			$(SRCDIR)vector_utils.c \
-			$(SRCDIR)vector_utils2.c \
-			$(SRCDIR)color_utils.c \
-			$(SRCDIR)window_ui.c \
-			$(SRCDIR)hex_to_color.c \
-			$(SRCDIR)3x3matrice_projection.c \
-			$(SRCDIR)isometric.c \
+			$(SRCDIR)debug.c \
+			$(SRCDIR)window/draw.c \
+			$(SRCDIR)window/window_ui.c \
+			$(SRCDIR)events/event_key.c \
+			$(SRCDIR)events/event_mouse.c \
+			$(SRCDIR)events/event_window.c \
+			$(SRCDIR)utils/quaternion_utils.c \
+			$(SRCDIR)utils/file_utils.c \
+			$(SRCDIR)utils/vector_utils.c \
+			$(SRCDIR)utils/vector_utils2.c \
+			$(SRCDIR)utils/color_utils.c \
+			$(SRCDIR)utils/hex_to_color.c \
+			$(SRCDIR)utils/center_points.c \
+			$(SRCDIR)conversion/perspective_projection.c \
+			$(SRCDIR)conversion/isometric.c \
 
 OBJS	:= ${SRCS:.c=.o}
 
@@ -34,7 +35,7 @@ CC		:= gcc
 
 .PHONY: all, clean, fclean, re, libmlx
 
-all: libmlx $(NAME)
+all: libmlx $(NAME) clean
 
 libft:
 	@make -C ./lib/libft

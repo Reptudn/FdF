@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 14:54:44 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 09:52:16 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ typedef enum e_mousekeys
 	MOUSE_SCROLL_DOWN = 5
 }				t_mousekeys;
 
+typedef enum e_projection
+{
+	PROJECTION_ISOMETRIC = 0,
+	PROJECTION_PERSPECTIVE = 1,
+	PROJECTION_FLAT = 2
+}				t_projection;
+
 typedef struct s_vector3
 {
 	int		x;
@@ -125,31 +132,33 @@ typedef struct s_map
 
 typedef struct s_vars
 {
-	short		run;
-	short		update;
-	void		*mlx;
-	mlx_image_t	*image;
-	int			window_width;
-	int			window_height;
-	t_map		*map;
-	t_camera	*camera;
-	int			draw_size;
-	int			draw_line;
+	short			run;
+	short			update;
+	void			*mlx;
+	mlx_image_t		*image;
+	int				window_width;
+	int				window_height;
+	t_map			*map;
+	t_camera		*camera;
+	int				draw_size;
+	int				draw_line;
+	t_projection	projection;
 }				t_vars;
 
 t_vector3		**get_map(int fd, t_map *map_struct);
 
 // map
-void 			map_rotate(t_map *map, double angle);
 void			map_draw(void *param);
 void			map_move(t_vector3 position, t_map *map);
-void			map_draw_new(void *param);
+void			center(t_vars *vars);
+void			map_draw_flat(t_vars *vars);
 
 // events
 void			event_onresize(int x, int y, void *param);
 void			event_onkey(mlx_key_data_t keycode, void *param);
 void			event_onmouse(mlx_key_data_t keycode, void *param);
 void			event_onscroll(double xdelta, double ydelta, void *param);
+void			event_onclose(void *param);
 
 // vector to 2d conversion
 t_vector2		get_screen_coordinates(t_transform transform, t_camera *camera);
@@ -205,7 +214,7 @@ void			debug_print_map(t_map map);
 void			debug_draw_info(t_vars *vars);
 
 // projection
-t_vector2 		isometric_projection(t_vector3 input, t_vars *fdf);
+t_vector2 		isometric_projection(t_vector3 input, t_vars *vars);
 void			map_draw_isometric(void *param);
 
 #endif

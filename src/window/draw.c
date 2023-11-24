@@ -6,12 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 13:39:03 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:35:43 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include <stdio.h>
+#include "../../include/fdf.h"
 
 typedef struct s_line
 {

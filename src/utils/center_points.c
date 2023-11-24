@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   center_points.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 11:56:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 12:00:25 by jkauker          ###   ########.fr       */
+/*   Created: 2023/11/24 09:38:44 by jkauker           #+#    #+#             */
+/*   Updated: 2023/11/24 09:40:34 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
-void	clean_program(void *param)
+void	center(t_vars *vars)
 {
-	t_vars	*vars;
+	int		x;
+	int		y;
 
-	vars = (t_vars *)param;
-	free(vars->map->points);
-	free(vars->map);
-	free(vars->camera);
-	free(vars);
-	exit(0);
+	x = 0;
+	y = 0;
+	while (x < vars->map->size_x)
+	{
+		y = 0;
+		while (y < vars->map->size_y)
+		{
+			vars->map->points[y][x].x -= vars->map->size_x / 2;
+			vars->map->points[y][x].y -= vars->map->size_y / 2;
+			y++;
+		}
+		x++;
+	}
 }

@@ -6,11 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:50 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/20 15:17:24 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:35:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 t_quaternion	quaternion_add(t_quaternion quaternion1,
 					t_quaternion quaternion2)

@@ -6,11 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 09:32:42 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:35:54 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 t_vector3	vector_add(t_vector3 vec1, t_vector3 vec2)
 {

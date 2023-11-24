@@ -6,12 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 15:12:04 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 09:51:31 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-#include <unistd.h>
 
 t_map	create_map(char *map_name, int fd, t_vars *vars)
 {
@@ -44,8 +43,12 @@ void	gameloop(void *param)
 	if (vars->update == 0 || vars->run == 0)
 			return ;
 	mlx_delete_image(vars->mlx, vars->image);
-	// map_draw(vars);
-	map_draw_isometric(param);
+	if (vars->projection == PROJECTION_PERSPECTIVE)
+		map_draw(param);
+	else if (vars->projection == PROJECTION_FLAT)
+		map_draw_flat(vars);
+	else
+		map_draw_isometric(param);
 	update_window_ui(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
@@ -61,12 +64,12 @@ void	register_hooks(void *param)
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 5;
-	map_draw_isometric(param);
-	// map_draw(vars);
-	// map_draw_new(vars);
+	vars->projection = PROJECTION_PERSPECTIVE;
+	center(vars);
+	map_draw(param);
 	update_window_ui(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
-	// mlx_mouse_hook(vars->mlx, event_onmouse, param);
+	mlx_close_hook(vars->mlx, event_onclose, param);
 	mlx_resize_hook(vars->mlx, event_onresize, param);
 	mlx_loop_hook(vars->mlx, gameloop, param);
 	mlx_scroll_hook(vars->mlx, event_onscroll, param);
@@ -85,7 +88,7 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	vars.mlx = mlx_init(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT,
-			"FdF by jkauker", true);
+			ft_strjoin("FdF by jkauker | Map: ", argv[1]), true);
 	if (!vars.mlx)
 	{
 		debug_error("Could not initialize mlx");

@@ -6,12 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:28:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 15:36:06 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:55:39 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-
+#include "../../include/fdf.h"
 
 static void	rotate_x(int *y, int *z, double alpha)
 {
@@ -60,16 +59,16 @@ static void	iso(int *x, int *y, int z)
 	*y = -z + (previous_x + previous_y) * sin(0.523599);
 }
 
-t_vector2 isometric_projection(t_vector3 input, t_vars *fdf)
+t_vector2 isometric_projection(t_vector3 input, t_vars *vars)
 {
 	t_vector3 copy;
 
 	copy.x = input.x;
 	copy.y = input.y;
 	copy.z = input.z;
-	rotate(copy, (t_vector3){fdf->map->transform.rotation.x, fdf->map->transform.rotation.y, fdf->map->transform.rotation.z, 0});
+	rotate(copy, (t_vector3){vars->map->transform.rotation.x, vars->map->transform.rotation.y, vars->map->transform.rotation.z, 0});
 	iso(&copy.x, &copy.y, copy.z);
-	copy.x += fdf->camera->transform.position.x;
-	copy.y += fdf->camera->transform.position.y;
+	copy.x += vars->camera->transform.position.x;
+	copy.y += vars->camera->transform.position.y;
 	return ((t_vector2){copy.x, copy.y});
 }

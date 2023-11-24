@@ -6,12 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 09:51:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:36:13 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include <stdlib.h>
+#include "../../include/fdf.h"
 
 t_vector3	convert_to_vector3(int x, int y, int z)
 {

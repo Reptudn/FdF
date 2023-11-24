@@ -6,11 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:29 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/21 12:13:09 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:35:25 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 void	window_ui_show_controls(t_vars *vars)
 {

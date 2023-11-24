@@ -6,11 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 09:18:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 09:45:46 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 08:36:03 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 int	get_single_value(char last, char first)
 {
