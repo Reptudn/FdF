@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 09:54:19 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 11:00:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	map_draw(void *param)
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
-					y, vars->map->points[y][x].z, 0},
+			last_point = get_screen_coordinates((t_transform){(t_vector3){vars->map->points[x][y].x,
+					vars->map->points[x][y].y, -vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->camera);
-			last_point.x += (vars->window_width / 2) + x * 2 + vars->map->transform.position.x;
-			last_point.y += (vars->window_height / 2) + y * 2  + vars->map->transform.position.y;
+			last_point.x += ((double)vars->window_width / 2) + x * ((vars->window_width * 0.8) / vars->map->size_x) + vars->map->transform.position.x;
+			last_point.y += ((double)vars->window_height / 2) + y * ((vars->window_width * 0.8) / vars->map->size_x)  + vars->map->transform.position.y;
 			if (last_point.x >= -100 && last_point.x < vars->window_width + 100
 					&& last_point.y >= -100 && last_point.y < vars->window_height + 100)
 			{
 				if (vars->draw_line == 1)
-					draw_line_to_neighbours(vars, last_point, x, y);
+					draw_line_to_neighbours(vars, last_point, vars->map->points[x][y].x, vars->map->points[x][y].y);
 				draw_dot(last_point, vars->draw_size, param, vars->map->points[y][x].color);
 			}
 		}
@@ -70,7 +70,9 @@ void	map_draw_isometric(void *param)
 		while (++y < vars->map->size_y)
 		{
 			last_point = isometric_projection(vars->map->points[y][x], vars);
-			draw_dot(last_point, 3, param, vars->map->points[y][x].color);
+			last_point.x += ((double)vars->window_width / 2) + vars->map->transform.position.x;
+			last_point.y += ((double)vars->window_height / 2) + vars->map->transform.position.y;
+			draw_dot(last_point, vars->draw_size, param, vars->map->points[y][x].color);
 		}
 		x++;
 	}
@@ -90,8 +92,7 @@ void	map_draw_flat(t_vars *vars)
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			draw_dot((t_vector2){x, y}, 3, &vars, vars->map->points[y][x].color);
-			printf("x: %d, y: %d\n", x, y);
+			draw_dot((t_vector2){vars->map->points[x][y].x * ((vars->window_width * 0.8) / vars->map->size_x), vars->map->points[x][y].y * ((vars->window_width * 0.8) / vars->map->size_x)}, vars->draw_size, &vars, vars->map->points[y][x].color);
 		}
 		x++;
 	}

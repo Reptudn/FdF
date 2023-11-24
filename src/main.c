@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 09:51:31 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 10:52:43 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	register_hooks(void *param)
 	vars->update = 0;
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
-	vars->draw_size = 5;
+	vars->draw_size = 3;
 	vars->projection = PROJECTION_PERSPECTIVE;
 	center(vars);
 	map_draw(param);
