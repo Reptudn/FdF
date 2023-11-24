@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 08:35:43 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:20:16 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,31 @@ void	draw_dot(t_vector2 middle_point, int radius,
 	}
 }
 
+void	draw_square(t_vector2 middle_point, int size,
+	void *param, int color)
+{
+	int		x;
+	int		y;
+	t_vars	*vars;
+
+	vars = (t_vars *)param;
+    x = middle_point.x - size;
+    while (x <= middle_point.x + size)
+    {
+        y = middle_point.y - size;
+        while (y <= middle_point.y + size)
+        {
+            if ((x == middle_point.x - size || x == middle_point.x + size || y == middle_point.y - size || y == middle_point.y + size) 
+                && x >= 0 && x < vars->window_width && y >= 0 && y < vars->window_height)
+            {
+                mlx_put_pixel(vars->image, x, y, color);
+            }
+            y++;
+        }
+        x++;
+    }
+}
+
 /*
 ** This function is used to draw a line between two points.
 ** It uses the Bresenham's line algorithm.
@@ -124,21 +149,21 @@ void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point, int x, int y)
 	if (x - 1 >= 0)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x - 1].x,
 					vars->map->points[y][x - 1].y, vars->map->points[y][x - 1].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->camera),
+					(t_quaternion){0, 0, 0, 0}}, vars->map),
 					vars, get_rgba(0, 255, 0, 255));
 	if (x + 1 < vars->map->size_x)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x + 1].x,
 					vars->map->points[y][x + 1].y, vars->map->points[y][x + 1].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->camera),
+					(t_quaternion){0, 0, 0, 0}}, vars->map),
 					vars, get_rgba(0, 255, 0, 255));
 	if (y - 1 >= 0)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y - 1][x].x,
 					vars->map->points[y - 1][x].y, vars->map->points[y - 1][x].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->camera),
+					(t_quaternion){0, 0, 0, 0}}, vars->map),
 					vars, get_rgba(0, 255, 0, 255));
 	if (y + 1 < vars->map->size_y)
 		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y + 1][x].x,
 					vars->map->points[y + 1][x].y, vars->map->points[y + 1][x].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->camera),
+					(t_quaternion){0, 0, 0, 0}}, vars->map),
 					vars, get_rgba(0, 255, 0, 255));
 }

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:50 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 08:35:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:29:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,15 @@ t_quaternion	quaternion_new(int x, int y, int z, int w)
 	return ((t_quaternion){x, y, z, w});
 }
 
-double	quaternion_to_radian(t_quaternion degrees)
+t_quaternion angle_to_quaternion(float theta, t_vector3 axis)
 {
-	return (2 * acos(degrees.w));
+    t_quaternion q;
+    float sin_theta_over_two = sin(theta / 2);
+
+    q.w = cos(theta / 2);
+    q.x = axis.x * sin_theta_over_two;
+    q.y = axis.y * sin_theta_over_two;
+    q.z = axis.z * sin_theta_over_two;
+
+    return q;
 }

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 10:52:43 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:00:07 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	gameloop(void *param)
 	t_vars		*vars;
 
 	vars = (t_vars *)param;
-	
+
 	if (vars->update == 0 || vars->run == 0)
 			return ;
 	mlx_delete_image(vars->mlx, vars->image);
@@ -84,7 +84,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		debug_error("No file given");
+		debug_error("No file given!");
 		return (RUN_ERROR);
 	}
 	vars.mlx = mlx_init(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT,
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	camera = camera_create((t_vector3){200, 300, 0, 0},
+	camera = camera_create((t_vector3){200, 1000, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = &map;
 	vars.camera = &camera;

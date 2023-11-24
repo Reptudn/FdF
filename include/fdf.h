@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 09:52:16 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:30:54 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void			map_draw(void *param);
 void			map_move(t_vector3 position, t_map *map);
 void			center(t_vars *vars);
 void			map_draw_flat(t_vars *vars);
+void			map_rotate(double rotation, t_vector3 axis, t_map *map);
 
 // events
 void			event_onresize(int x, int y, void *param);
@@ -161,7 +162,7 @@ void			event_onscroll(double xdelta, double ydelta, void *param);
 void			event_onclose(void *param);
 
 // vector to 2d conversion
-t_vector2		get_screen_coordinates(t_transform transform, t_camera *camera);
+t_vector2		get_screen_coordinates(t_transform transform, t_map *map);
 
 t_vector2		to_screen(t_vector3 point, t_vars *vars);
 
@@ -183,6 +184,8 @@ void			draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point,
 					int x, int y);
 void			draw_dot(t_vector2 middle_point,
 					int radius, void *param, int color);
+void			draw_square(t_vector2 middle_point, int size,
+					void *param, int color);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
@@ -198,7 +201,7 @@ double			quaternion_dotprod(t_quaternion quaternion1,
 double			quaternion_angle_between(t_quaternion quaternion1,
 					t_quaternion quaternion2);
 t_quaternion	quaternion_new(int x, int y, int z, int w);
-double			quaternion_to_radian(t_quaternion degrees);
+t_quaternion	angle_to_quaternion(float theta, t_vector3 axis);
 t_matrice		matrice_multiply(t_matrice matrice1, t_matrice matrice2);
 
 // raycast

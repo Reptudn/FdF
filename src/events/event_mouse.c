@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:13:33 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 09:14:41 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:49:18 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,11 @@ void	event_onscroll(double xdelta, double ydelta, void *param)
 			return ;
 		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, -zoom_factor, 0},
 			(t_quaternion){0, 0, 0, 0}});
-		// map_move((t_vector3){0, 0, zoom_factor , 0}, vars->map);
-		// vars->draw_size += 0.1;
 	}
 	else if (ydelta > 0)
 	{
 		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, zoom_factor, 0},
 			(t_quaternion){0, 0, 0, 0}});
-		// map_move((t_vector3){0, 0, -zoom_factor , 0}, vars->map);
-		// vars->draw_size -= 0.1;
 	}
 	if (xdelta > 0)
 	{

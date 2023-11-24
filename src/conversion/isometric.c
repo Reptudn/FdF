@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:28:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 08:55:39 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 13:56:05 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	iso(int *x, int *y, int z)
 	previous_y = *y;
 	*x = (previous_x - previous_y) * cos(0.523599);
 	*y = -z + (previous_x + previous_y) * sin(0.523599);
+	// *x = (previous_x - previous_y) * cos(1);
+	// *y = -z + (previous_x + previous_y) * sin(1);
 }
 
 t_vector2 isometric_projection(t_vector3 input, t_vars *vars)
@@ -66,9 +68,10 @@ t_vector2 isometric_projection(t_vector3 input, t_vars *vars)
 	copy.x = input.x;
 	copy.y = input.y;
 	copy.z = input.z;
-	rotate(copy, (t_vector3){vars->map->transform.rotation.x, vars->map->transform.rotation.y, vars->map->transform.rotation.z, 0});
+	printf("Camera rotation: %d, %d, %d\n", vars->camera->transform.rotation.x, vars->camera->transform.rotation.y, vars->camera->transform.rotation.z);
+	rotate(copy, (t_vector3){vars->camera->transform.rotation.x, vars->camera->transform.rotation.y, vars->camera->transform.rotation.z, 0});
 	iso(&copy.x, &copy.y, copy.z);
-	copy.x += vars->camera->transform.position.x;
+	copy.x += vars->camera->transform.position.x;	
 	copy.y += vars->camera->transform.position.y;
 	return ((t_vector2){copy.x, copy.y});
 }

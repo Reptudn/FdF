@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:41 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/24 08:33:10 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:19:28 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_matrice	matrice_multiply(t_matrice matrice1, t_matrice matrice2)
 **	separately for the x and y coordinates.
 */
 
-t_vector2	get_screen_coordinates(t_transform transform, t_camera *camera)
+t_vector2	get_screen_coordinates(t_transform transform, t_map *map)
 {
 	t_vector2	coordinates;
 	t_matrice	matrice;
@@ -101,7 +101,7 @@ t_vector2	get_screen_coordinates(t_transform transform, t_camera *camera)
 	matrice = (t_matrice){0};
 	transform.position.z *= -1;
 	point_to_matrice(transform, &matrice);
-	point_to_matrice(camera->transform, &projection);
+	point_to_matrice(map->transform, &projection);
 	matrice = matrice_multiply(matrice, projection);
 	coordinates.x = matrice.matrice[0][0] * transform.position.x
 		+ matrice.matrice[0][1] * transform.position.y
