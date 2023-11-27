@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:36:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:34:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_mouse
 	double				y;
 	double				prev_x;
 	double				prev_y;
-	int				button;
+	int					button;
 }				t_mouse;
 
 typedef struct s_vars
@@ -155,7 +155,7 @@ typedef struct s_vars
 	t_mouse			mouse;
 }				t_vars;
 
-t_vector3		**get_map(int fd, t_map *map_struct);
+t_vector3		**get_map(int fd, t_map *map_struct, t_vars *vars);
 
 // map
 void			map_draw(void *param);
@@ -217,9 +217,6 @@ t_quaternion	quaternion_new(int x, int y, int z, int w);
 t_quaternion	angle_to_quaternion(float theta, t_vector3 axis);
 t_matrice		matrice_multiply(t_matrice matrice1, t_matrice matrice2);
 
-// raycast
-int				is_visible_to_camera(t_camera *cam, t_vector3 *point);
-
 // ui
 void			window_ui_show_controls(t_vars *vars);
 
@@ -230,7 +227,7 @@ void			debug_print_map(t_map map);
 void			debug_draw_info(t_vars *vars);
 
 // projection
-t_vector2 		isometric_projection(t_vector3 input, t_vars *vars);
+t_vector2		isometric_projection(t_vector3 input, t_vars *vars);
 void			map_draw_isometric(void *param);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:49:47 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:38:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ void	draw_square(t_vector2 middle_point, int size,
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
-    x = middle_point.x - size;
-    while (x <= middle_point.x + size)
-    {
-        y = middle_point.y - size;
-        while (y <= middle_point.y + size)
-        {
-            if ((x == middle_point.x - size || x == middle_point.x + size || y == middle_point.y - size || y == middle_point.y + size) 
-                && x >= 0 && x < vars->window_width && y >= 0 && y < vars->window_height)
-            {
-                mlx_put_pixel(vars->image, x, y, color);
-            }
-            y++;
-        }
-        x++;
-    }
+	x = middle_point.x - size;
+	while (x <= middle_point.x + size)
+	{
+		y = middle_point.y - size;
+		while (y <= middle_point.y + size)
+		{
+			if ((x == middle_point.x - size || x == middle_point.x + size
+					|| y == middle_point.y - size || y == middle_point.y + size)
+				&& x >= 0 && x < vars->window_width && y >= 0
+				&& y < vars->window_height)
+				mlx_put_pixel(vars->image, x, y, color);
+			y++;
+		}
+		x++;
+	}
 }
 
 /*

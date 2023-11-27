@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:00:50 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:38:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	map_draw(void *param)
 				&& last_point.y >= -100 && last_point.y < vars->window_height
 				+ 100)
 			{
-				if (vars->draw_line == 1)
-					draw_line_to_neighbours(vars, last_point, x, y);
+				// if (vars->draw_line == 1)
+				// 	draw_line_to_neighbours(vars, last_point, x, y);
 				draw_dot(last_point, vars->draw_size, param,
 					vars->map->points[y][x].color);
 			}
