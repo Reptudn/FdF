@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:37 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:59:51 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef struct s_vars
 	t_mouse			mouse;
 }				t_vars;
 
-t_vector3		**get_map(int fd, t_map *map_struct, t_vars *vars);
+t_vector3		**get_map(int fd, t_map *map_struct);
 
 // map
 void			map_draw(void *param);

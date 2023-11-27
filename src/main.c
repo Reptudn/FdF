@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:49 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 12:59:55 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,31 @@
 
 t_map	create_map(char *map_name, int fd, t_vars *vars)
 {
-	t_map	map;
+	t_map	*map;
 
 	if (fd == -1)
 	{
 		debug_error("Could not open file");
 		exit(1);
 	}
-	map.map_name = map_name;
-	map.points = get_map(fd, &map, vars);
-	if (map.points == 0)
+	map = malloc(sizeof(t_map));
+	if (!map)
+	{
+		debug_error("Could not allocate memory for map");
+		exit(1);
+	}
+	map->map_name = map_name;
+	map->points = get_map(fd, map);
+	if (map->points == 0)
 	{
 		debug_error("Could not create map");
 		exit(1);
 	}
-	map.transform.position = (t_vector3){0, 0, 0, 0};
-	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
-	vars->map = &map;
+	map->transform.position = (t_vector3){0, 0, 0, 0};
+	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
+	vars->map = map;
 	center(vars);
-	return (map);
+	return (*map);
 }
 
 void	gameloop(void *param)
