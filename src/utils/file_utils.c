@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 13:07:29 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:15:16 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 		if (map_struct->size_x <= 0)
 			return (0);
 		ft_printf("Line %d:  %s\n", map_struct->size_y, line);
+		map_struct->size_y++;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		map = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (map_struct->size_y + 1));
-		map_struct->size_y++;
 	}
-	map_struct->size_y--;
+	printf("Map size: %d x %d\n", map_struct->size_x, map_struct->size_y);
 	return (map);
 }
