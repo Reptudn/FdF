@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 14:31:34 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:22:21 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	map_draw(void *param)
 	t_vars				*vars;
 
 	x = 0;
-	y = 0;
 	vars = (t_vars *)param;
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
@@ -45,8 +44,10 @@ void	map_draw(void *param)
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
 					y, -vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
-			last_point.x += x * 6 + vars->map->transform.position.x;
-			last_point.y += y * 6  + vars->map->transform.position.y;
+			// last_point.x += x * 6 + vars->map->transform.position.x + vars->window_width / 2;
+			// last_point.y += y * 6  + vars->map->transform.position.y + vars->window_height / 2;
+			last_point.x += vars->window_width / 2 + vars->map->transform.position.x + vars->map->points[y][x].x;
+			last_point.y += vars->window_height / 2	+ vars->map->transform.position.y + vars->map->points[y][x].y;
 			if (last_point.x >= -100 && last_point.x < vars->window_width + 100
 					&& last_point.y >= -100 && last_point.y < vars->window_height + 100)
 			{
@@ -70,6 +71,7 @@ void	map_draw_isometric(void *param)
 	x = 0;
 	y = 0;
 	vars = (t_vars *)param;
+	mlx_delete_image(vars->mlx, vars->image);
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
 	while (x < vars->map->size_x)
@@ -78,8 +80,8 @@ void	map_draw_isometric(void *param)
 		while (++y < vars->map->size_y)
 		{
 			last_point = isometric_projection(vars->map->points[y][x], vars);
-			last_point.x += x;
-			last_point.y += y;
+			last_point.x += -vars->map->transform.position.x + vars->window_width / 2;
+			last_point.y += -vars->map->transform.position.y + vars->window_height / 2;
 			draw_dot(last_point, vars->draw_size, param, vars->map->points[y][x].color);
 		}
 		x++;
@@ -100,8 +102,10 @@ void	map_draw_flat(t_vars *vars)
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			draw_dot((t_vector2){x * 3, y * 3}, vars->draw_size, &vars, vars->map->points[y][x].color);
+			draw_dot((t_vector2){(int)(vars->camera->fov * (x + (int)(vars->window_width / 2) + vars->map->transform.position.x)),
+					(int)(vars->camera->fov * (y + (int)(vars->window_width / 2) + vars->map->transform.position.y))}, vars->draw_size, vars, vars->map->points[y][x].color);
 		}
 		x++;
 	}
+	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
 }

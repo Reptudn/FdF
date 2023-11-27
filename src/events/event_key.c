@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 14:38:08 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 09:52:05 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	utilities(mlx_key_data_t keycode, t_vars *vars)
 		if (keycode.key == MLX_KEY_R)
 		{
 			vars->camera->transform = (t_transform){(t_vector3){200, 300, 0, 0},
+				(t_quaternion){0, 0, 0, 0}};
+			vars->map->transform = (t_transform){(t_vector3){0, 0, 0, 0},
 				(t_quaternion){0, 0, 0, 0}};
 			vars->update = 1;
 		}

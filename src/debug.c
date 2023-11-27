@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:17:38 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/22 12:27:55 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 09:36:19 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	debug_print_map(t_map map)
 
 void	debug_draw_info(t_vars *vars)
 {
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	printf("Window Width: %d\n", vars->window_width);
-	printf("Window Height: %d\n", vars->window_height);
-	printf("Draw Size: %d\n", vars->draw_size);
-	printf("Map Name: %s\n", vars->map->map_name);
-	printf("Map Size X: %d\n", vars->map->size_x);
-	printf("Map Size Y: %d\n", vars->map->size_y);
-	printf("Camera Position: %d, %d, %d\n", vars->camera->transform.position.x,
-		vars->camera->transform.position.y, vars->camera->transform.position.z);
-	printf("Map Position: %d, %d, %d\n", vars->map->transform.position.x,
+	ft_printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	ft_printf("Window Width: %d\n", vars->window_width);
+	ft_printf("Window Height: %d\n", vars->window_height);
+	ft_printf("Draw Size: %d\n", vars->draw_size);
+	ft_printf("Map Name: %s\n", vars->map->map_name);
+	ft_printf("Map Size X: %d\n", vars->map->size_x);
+	ft_printf("Map Size Y: %d\n", vars->map->size_y);
+	ft_printf("Map Position: %d, %d, %d\n", vars->map->transform.position.x,
 		vars->map->transform.position.y, vars->map->transform.position.z);
+	ft_printf("Map Rotation: %d, %d, %d\n", vars->map->transform.rotation.x,
+		vars->map->transform.rotation.y, vars->map->transform.rotation.z);
 }

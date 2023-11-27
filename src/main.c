@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 14:00:07 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:24:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	map.transform.position = (t_vector3){0, 0, 0, 0};
 	map.transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = &map;
+	center(vars);
 	return (map);
 }
 
@@ -49,7 +50,7 @@ void	gameloop(void *param)
 		map_draw_flat(vars);
 	else
 		map_draw_isometric(param);
-	update_window_ui(vars);
+	window_ui_show_controls(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
 }
@@ -65,14 +66,20 @@ void	register_hooks(void *param)
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 3;
 	vars->projection = PROJECTION_PERSPECTIVE;
+	vars->mouse.button = 0;
+	vars->mouse.x = 0;
+	vars->mouse.y = 0;
+	vars->mouse.prev_x = 0;
+	vars->mouse.prev_y = 0;
 	center(vars);
 	map_draw(param);
-	update_window_ui(vars);
+	window_ui_show_controls(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	mlx_close_hook(vars->mlx, event_onclose, param);
 	mlx_resize_hook(vars->mlx, event_onresize, param);
 	mlx_loop_hook(vars->mlx, gameloop, param);
 	mlx_scroll_hook(vars->mlx, event_onscroll, param);
+	mlx_cursor_hook(vars->mlx, event_oncursor_move, param);
 	mlx_loop(vars->mlx);
 }
 

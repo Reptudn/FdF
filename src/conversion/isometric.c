@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:28:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 13:56:05 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:16:04 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ static void	rotate_z(int *x, int *y, double gamma)
 	*y = previous_x * sin(gamma) + previous_y * cos(gamma);
 }
 
-void	rotate(t_vector3 vector, t_vector3 rotation)
-{
-	rotate_x(&vector.y, &vector.z, rotation.x);
-	rotate_y(&vector.x, &vector.z, rotation.y);
-	rotate_z(&vector.x, &vector.y, rotation.z);
-}
-
 static void	iso(int *x, int *y, int z)
 {
 	int previous_x;
@@ -57,8 +50,6 @@ static void	iso(int *x, int *y, int z)
 	previous_y = *y;
 	*x = (previous_x - previous_y) * cos(0.523599);
 	*y = -z + (previous_x + previous_y) * sin(0.523599);
-	// *x = (previous_x - previous_y) * cos(1);
-	// *y = -z + (previous_x + previous_y) * sin(1);
 }
 
 t_vector2 isometric_projection(t_vector3 input, t_vars *vars)
@@ -68,10 +59,9 @@ t_vector2 isometric_projection(t_vector3 input, t_vars *vars)
 	copy.x = input.x;
 	copy.y = input.y;
 	copy.z = input.z;
-	printf("Camera rotation: %d, %d, %d\n", vars->camera->transform.rotation.x, vars->camera->transform.rotation.y, vars->camera->transform.rotation.z);
-	rotate(copy, (t_vector3){vars->camera->transform.rotation.x, vars->camera->transform.rotation.y, vars->camera->transform.rotation.z, 0});
+	rotate_x(&copy.y, &copy.z, vars->map->transform.rotation.x);
+	rotate_y(&copy.x, &copy.z, vars->map->transform.rotation.y);
+	rotate_z(&copy.x, &copy.y, vars->map->transform.rotation.z);
 	iso(&copy.x, &copy.y, copy.z);
-	copy.x += vars->camera->transform.position.x;	
-	copy.y += vars->camera->transform.position.y;
 	return ((t_vector2){copy.x, copy.y});
 }

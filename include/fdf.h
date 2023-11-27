@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 14:30:54 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:24:12 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,15 @@ typedef struct s_map
 	t_vector3		**points;
 }				t_map;
 
+typedef struct s_mouse
+{
+	double				x;
+	double				y;
+	double				prev_x;
+	double				prev_y;
+	int				button;
+}				t_mouse;
+
 typedef struct s_vars
 {
 	short			run;
@@ -143,6 +152,7 @@ typedef struct s_vars
 	int				draw_size;
 	int				draw_line;
 	t_projection	projection;
+	t_mouse			mouse;
 }				t_vars;
 
 t_vector3		**get_map(int fd, t_map *map_struct);
@@ -160,6 +170,7 @@ void			event_onkey(mlx_key_data_t keycode, void *param);
 void			event_onmouse(mlx_key_data_t keycode, void *param);
 void			event_onscroll(double xdelta, double ydelta, void *param);
 void			event_onclose(void *param);
+void			event_oncursor_move(double x, double y, void *param);
 
 // vector to 2d conversion
 t_vector2		get_screen_coordinates(t_transform transform, t_map *map);
@@ -208,7 +219,7 @@ t_matrice		matrice_multiply(t_matrice matrice1, t_matrice matrice2);
 int				is_visible_to_camera(t_camera *cam, t_vector3 *point);
 
 // ui
-void			update_window_ui(t_vars *vars);
+void			window_ui_show_controls(t_vars *vars);
 
 // debug
 void			debug_error(char *error_msg);
