@@ -17,13 +17,9 @@ if (len(sys.argv) > 1):
             res[-1].append(hex_color)
 
     row_count = 0
-    col = 0
     with open('res.fdf', 'w') as f:
         for y, row in enumerate(res):
             for x, color in enumerate(row):
-                col += 1
-                if (col > 250):
-                    break
                 f.write(str(1) + "," + str(color) + " ") #replace 1 with the desired height
             f.write("\n")
             row_count += 1
