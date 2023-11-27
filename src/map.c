@@ -6,11 +6,12 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:38:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:47:48 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdio.h>
 
 void	map_move(t_vector3 position, t_map *map)
 {
@@ -46,15 +47,13 @@ void	map_draw(void *param)
 					y, vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
 			last_point.x += vars->window_width / 2
-				+ vars->map->transform.position.x + vars->map->points[y][x].x;
+				+ vars->map->transform.position.x + vars->map->points[x][y].x;
 			last_point.y += vars->window_height / 2
-				+ vars->map->transform.position.y + vars->map->points[y][x].y;
+				+ vars->map->transform.position.y + vars->map->points[x][y].y;
 			if (last_point.x >= -100 && last_point.x < vars->window_width + 100
 				&& last_point.y >= -100 && last_point.y < vars->window_height
 				+ 100)
 			{
-				// if (vars->draw_line == 1)
-				// 	draw_line_to_neighbours(vars, last_point, x, y);
 				draw_dot(last_point, vars->draw_size, param,
 					vars->map->points[y][x].color);
 			}
@@ -81,13 +80,13 @@ void	map_draw_isometric(void *param)
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			last_point = isometric_projection(vars->map->points[y][x], vars);
+			last_point = isometric_projection(vars->map->points[x][y], vars);
 			last_point.x += -vars->map->transform.position.x
 				+ vars->window_width / 2;
 			last_point.y += -vars->map->transform.position.y
 				+ vars->window_height / 2;
 			draw_dot(last_point, vars->draw_size, param,
-				vars->map->points[y][x].color);
+				vars->map->points[x][y].color);
 		}
 		x++;
 	}
@@ -96,8 +95,9 @@ void	map_draw_isometric(void *param)
 
 void	map_draw_flat(t_vars *vars)
 {
-	int					x;
-	int					y;
+	int			x;
+	int			y;
+	t_vector2	last_point;
 
 	x = 0;
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
@@ -107,11 +107,14 @@ void	map_draw_flat(t_vars *vars)
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			draw_dot((t_vector2){x + (int)(vars->window_width / 2)
-				+ vars->map->transform.position.x, y
-				+ (int)(vars->window_width / 2)
-				+ vars->map->transform.position.y},
-				vars->draw_size, vars, vars->map->points[y][x].color);
+			last_point = (t_vector2){x * vars->window_width
+				/ vars->map->size_x * 0.8, y
+				* vars->window_height / vars->map->size_y * 0.8};
+			last_point.x -= vars->map->transform.position.x;
+			last_point.y -= vars->map->transform.position.y;
+			printf("x: %d, y: %d\n", last_point.x, last_point.y);
+			draw_dot(last_point, vars->draw_size,
+				vars, vars->map->points[y][x].color);
 		}
 		x++;
 	}
