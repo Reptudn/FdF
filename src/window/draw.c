@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 14:20:16 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:49:47 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,33 +137,4 @@ void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
 			line.start.y += line.sy;
 		}
 	}
-}
-
-void	draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point, int x, int y)
-{
-	int	xs;
-	int	ys;
-
-	xs = (vars->window_width / 2) + x * 10 + vars->map->transform.position.x;
-	ys = (vars->window_height / 2) + y * 10  + vars->map->transform.position.y;
-	if (x - 1 >= 0)
-		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x - 1].x,
-					vars->map->points[y][x - 1].y, vars->map->points[y][x - 1].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->map),
-					vars, get_rgba(0, 255, 0, 255));
-	if (x + 1 < vars->map->size_x)
-		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y][x + 1].x,
-					vars->map->points[y][x + 1].y, vars->map->points[y][x + 1].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->map),
-					vars, get_rgba(0, 255, 0, 255));
-	if (y - 1 >= 0)
-		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y - 1][x].x,
-					vars->map->points[y - 1][x].y, vars->map->points[y - 1][x].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->map),
-					vars, get_rgba(0, 255, 0, 255));
-	if (y + 1 < vars->map->size_y)
-		draw_line(curr_point, get_screen_coordinates((t_transform){(t_vector3){vars->map->points[y + 1][x].x,
-					vars->map->points[y + 1][x].y, vars->map->points[y + 1][x].z, 0},
-					(t_quaternion){0, 0, 0, 0}}, vars->map),
-					vars, get_rgba(0, 255, 0, 255));
 }

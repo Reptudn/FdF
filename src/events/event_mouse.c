@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:13:33 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:03:49 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:47:20 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void	event_oncursor_move(double x, double y, void *param)
 		vars->map->transform.rotation.x += (x - vars->mouse.prev_x) * 0.01;
 		vars->update = 1;
 	}
-	
 }

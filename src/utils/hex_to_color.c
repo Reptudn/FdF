@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 09:18:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 08:36:03 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:48:19 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,11 @@ int	hex_to_color(char *str)
 	int		r;
 	int		g;
 	int		b;
-	// int		a;
 
-	// write(1, "begin\n", 6);
-	// printf("Color: %s\n", str);
-	// write(1, "end\n", 4);
 	if (str[0] == '0' && str[1] == 'x')
 		str += 2;
 	r = get_single_value(str[0], str[1]);
 	g = get_single_value(str[2], str[3]);
 	b = get_single_value(str[4], str[5]);
-	// if (str[6] != 0 && str[7] != 0)
-	// 	a = get_single_value(str[6], str[7]);
-	// else
-	// 	a = 255;
 	return (get_rgba(r, g, b, 255));
 }

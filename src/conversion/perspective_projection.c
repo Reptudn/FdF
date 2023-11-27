@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:41 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/24 14:19:28 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:46:57 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,11 @@ t_vector2	get_screen_coordinates(t_transform transform, t_map *map)
 	{
 		coordinates.x /= perspective;
 		coordinates.y /= perspective;
-	} else {
+	}
+	else
+	{
 		coordinates.x = -1;
 		coordinates.y = -1;
 	}
-	//printf("Coordinates: %d, %d\n", coordinates.x, coordinates.y);
 	return (coordinates);
 }

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:24:33 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:50:10 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	gameloop(void *param)
 	t_vars		*vars;
 
 	vars = (t_vars *)param;
-
 	if (vars->update == 0 || vars->run == 0)
-			return ;
+		return ;
 	mlx_delete_image(vars->mlx, vars->image);
 	if (vars->projection == PROJECTION_PERSPECTIVE)
 		map_draw(param);

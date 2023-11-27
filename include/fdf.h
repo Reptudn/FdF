@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:24:12 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:36:20 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ void			draw_dot(t_vector2 middle_point,
 					int radius, void *param, int color);
 void			draw_square(t_vector2 middle_point, int size,
 					void *param, int color);
+void			draw_line(t_vector2 start, t_vector2 end, void *param,
+					int color);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);

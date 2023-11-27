@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 09:16:51 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:47:31 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	event_onclose(void *param)
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
-	free(vars->map->points);
-	free(vars->map);
-	free(vars->camera);
-	free(vars);
+	// free(vars->map->points);
+	// free(vars->map);
+	// free(vars->camera);
+	// free(vars);
 	exit(0);
 }

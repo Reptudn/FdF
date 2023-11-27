@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 09:52:05 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:45:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,14 @@
 
 void	rotation(mlx_key_data_t keycode, t_vars *vars)
 {
-	// if (keycode.key == MLX_KEY_I)
-	// 	camera_move(vars->camera, (t_transform){(t_vector3){0, 50, 0, 0},
-	// 		(t_quaternion){0, 0, 0, 0}});
-	// if (keycode.key == MLX_KEY_K)
-	// 	camera_move(vars->camera, (t_transform){(t_vector3){0,  -50, 0, 0},
-	// 		(t_quaternion){0, 0, 0, 0}});
-	// if (keycode.key == MLX_KEY_J)
-	// 	camera_move(vars->camera, (t_transform){(t_vector3){-50, 0, 0, 0},
-	// 		(t_quaternion){0, 0, 0, 0}});
-	// if (keycode.key == MLX_KEY_L)
-	// 	camera_move(vars->camera, (t_transform){(t_vector3){50, 0, 0, 0},
-	// 		(t_quaternion){0, 0, 0, 0}});
 	if (keycode.key == MLX_KEY_I)
-		map_rotate(200, (t_vector3){100, 0, 0, 0}, vars->map);
+		map_rotate(100, (t_vector3){100, 0, 0, 0}, vars->map);
 	if (keycode.key == MLX_KEY_K)
-		map_rotate(-200, (t_vector3){100, 0, 0, 0}, vars->map);
+		map_rotate(-100, (t_vector3){100, 0, 0, 0}, vars->map);
 	if (keycode.key == MLX_KEY_J)
-		map_rotate(200, (t_vector3){0, 100, 0, 0}, vars->map);
+		map_rotate(100, (t_vector3){0, 100, 0, 0}, vars->map);
 	if (keycode.key == MLX_KEY_L)
-		map_rotate(-200, (t_vector3){0, 100, 0, 0}, vars->map);
+		map_rotate(-100, (t_vector3){0, 100, 0, 0}, vars->map);
 	if (keycode.key == MLX_KEY_I || keycode.key == MLX_KEY_K
 		|| keycode.key == MLX_KEY_J || keycode.key == MLX_KEY_L)
 		vars->update = 1;
@@ -56,31 +44,31 @@ void	movement(mlx_key_data_t keycode, t_vars *vars)
 
 void	utilities(mlx_key_data_t keycode, t_vars *vars)
 {
-		if (keycode.key == MLX_KEY_R)
-		{
-			vars->camera->transform = (t_transform){(t_vector3){200, 300, 0, 0},
-				(t_quaternion){0, 0, 0, 0}};
-			vars->map->transform = (t_transform){(t_vector3){0, 0, 0, 0},
-				(t_quaternion){0, 0, 0, 0}};
-			vars->update = 1;
-		}
-		if (keycode.key == MLX_KEY_Q)
-		{
-			camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
-				(t_quaternion){0, 10, 0, 10}});
-			vars->update = 1;
-		}
-		if (keycode.key == MLX_KEY_E)
-		{
-			camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
-				(t_quaternion){0, -10, 0, -10}});
-			vars->update = 1;
-		}
-		if (keycode.key == MLX_KEY_SPACE && keycode.action == MLX_PRESS)
-		{
-			vars->draw_line = !vars->draw_line;
-			vars->update = 1;
-		}
+	if (keycode.key == MLX_KEY_R)
+	{
+		vars->camera->transform = (t_transform){(t_vector3){200, 300, 0, 0},
+			(t_quaternion){0, 0, 0, 0}};
+		vars->map->transform = (t_transform){(t_vector3){0, 0, 0, 0},
+			(t_quaternion){0, 0, 0, 0}};
+		vars->update = 1;
+	}
+	if (keycode.key == MLX_KEY_Q)
+	{
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
+			(t_quaternion){0, 10, 0, 10}});
+		vars->update = 1;
+	}
+	if (keycode.key == MLX_KEY_E)
+	{
+		camera_move(vars->camera, (t_transform){(t_vector3){0, 0, 0, 0},
+			(t_quaternion){0, -10, 0, -10}});
+		vars->update = 1;
+	}
+	if (keycode.key == MLX_KEY_SPACE && keycode.action == MLX_PRESS)
+	{
+		vars->draw_line = !vars->draw_line;
+		vars->update = 1;
+	}
 }
 
 void	perspective(mlx_key_data_t keycode, void *param)
