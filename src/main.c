@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 10:34:25 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 14:03:49 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	gameloop(void *param)
 	window_ui_show_controls(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
-	printf("update\n");
 }
 
 void	register_hooks(void *param)
@@ -79,7 +78,6 @@ void	register_hooks(void *param)
 	vars->mouse.prev_y = 0;
 	center(vars);
 	map_draw_isometric(param);
-	printf("Iso draw\n");
 	window_ui_show_controls(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	mlx_close_hook(vars->mlx, event_onclose, param);
@@ -88,7 +86,6 @@ void	register_hooks(void *param)
 	mlx_scroll_hook(vars->mlx, event_onscroll, param);
 	mlx_cursor_hook(vars->mlx, event_oncursor_move, param);
 	mlx_loop(vars->mlx);
-	printf("Hooks registered\n");
 }
 
 int	main(int argc, char **argv)

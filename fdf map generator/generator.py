@@ -4,7 +4,10 @@ import sys
 from PIL import Image #pip install pillow
 
 if (len(sys.argv) > 1):
-    img = Image.open(sys.argv[1])
+    if (sys.argv[1].startswith("./")):
+        img = Image.open(sys.argv[1])
+    else:
+        img = Image.open("./" + sys.argv[1])
     width, height = img.size
     pixels = img.load()
 
@@ -12,7 +15,7 @@ if (len(sys.argv) > 1):
     for y in range(height):
         res.append([])
         for x in range(width):
-            r, g, b = pixels[x, y]
+            r, g, b, *_ = pixels[x, y]
             hex_color = '0x{:02x}{:02x}{:02x}'.format(r,g,b)
             res[-1].append(hex_color)
 

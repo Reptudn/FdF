@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 13:13:07 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 14:49:49 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	map_draw_isometric(void *param)
 				vars->map->points[y][x].color);
 			y++;
 		}
-		printf("y: %d\tx: %d\n", y, x);
 		x++;
 	}
 	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
