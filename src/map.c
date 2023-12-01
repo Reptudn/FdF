@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 13:05:02 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 13:13:07 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	map_draw(void *param)
 					y, vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
 			last_point.x += vars->window_width / 2
-				+ vars->map->transform.position.x + vars->map->points[x][y].x;
+				+ vars->map->transform.position.x + vars->map->points[y][x].x;
 			last_point.y += vars->window_height / 2
-				+ vars->map->transform.position.y + vars->map->points[x][y].y;
+				+ vars->map->transform.position.y + vars->map->points[y][x].y;
 			if (last_point.x >= -100 && last_point.x < vars->window_width + 100
 				&& last_point.y >= -100 && last_point.y < vars->window_height
 				+ 100)

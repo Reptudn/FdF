@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:59:51 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 13:15:07 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ t_vector3		**get_map(int fd, t_map *map_struct);
 void			map_draw(void *param);
 void			map_move(t_vector3 position, t_map *map);
 void			center(t_vars *vars);
+void			reset_tranform(t_vars *vars);
 void			map_draw_flat(t_vars *vars);
 void			map_rotate(double rotation, t_vector3 axis, t_map *map);
 

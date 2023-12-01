@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 12:53:35 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 13:07:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ int	parse_line(t_vector3 **map, char *line, int count)
 		return (0);
 	while (contents[++i])
 	{
-		// if (ft_strchr(contents[i], ',') && ft_split(contents[i], ','))
-		// 	map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-		// 		hex_to_color(ft_split(contents[i], ',')[1])};
-		// else
-		// 	map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-		// 		hex_to_color("0xFFFFFF")};
 		if (!splitter(map, contents, i, count))
 			return (0);
 		free(contents[i]);
@@ -95,7 +89,6 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 			break ;
 		map = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (map_struct->size_y + 1));
-		printf("map_struct->size_y: %d\n", map_struct->size_y);
 	}
 	return (map);
 }

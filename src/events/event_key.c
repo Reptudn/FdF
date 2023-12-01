@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 11:45:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 13:16:06 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,19 @@ void	perspective(mlx_key_data_t keycode, void *param)
 	if (keycode.key == MLX_KEY_1)
 	{
 		vars->projection = PROJECTION_PERSPECTIVE;
+		reset_tranform(vars);
 		vars->update = 1;
 	}
 	if (keycode.key == MLX_KEY_2)
 	{
 		vars->projection = PROJECTION_ISOMETRIC;
+		reset_tranform(vars);
 		vars->update = 1;
 	}
 	if (keycode.key == MLX_KEY_3)
 	{
 		vars->projection = PROJECTION_FLAT;
+		reset_tranform(vars);
 		vars->update = 1;
 	}
 }
