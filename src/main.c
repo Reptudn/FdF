@@ -6,13 +6,13 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:59:55 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 10:34:25 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_map	create_map(char *map_name, int fd, t_vars *vars)
+t_map	*create_map(char *map_name, int fd, t_vars *vars)
 {
 	t_map	*map;
 
@@ -38,7 +38,7 @@ t_map	create_map(char *map_name, int fd, t_vars *vars)
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = map;
 	center(vars);
-	return (*map);
+	return (map);
 }
 
 void	gameloop(void *param)
@@ -58,6 +58,7 @@ void	gameloop(void *param)
 	window_ui_show_controls(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
+	printf("update\n");
 }
 
 void	register_hooks(void *param)
@@ -70,14 +71,15 @@ void	register_hooks(void *param)
 	vars->window_height = WINDOW_DEFAULT_HEIGHT;
 	vars->window_width = WINDOW_DEFAULT_WIDTH;
 	vars->draw_size = 3;
-	vars->projection = PROJECTION_PERSPECTIVE;
+	vars->projection = PROJECTION_ISOMETRIC;
 	vars->mouse.button = 0;
 	vars->mouse.x = 0;
 	vars->mouse.y = 0;
 	vars->mouse.prev_x = 0;
 	vars->mouse.prev_y = 0;
 	center(vars);
-	map_draw(param);
+	map_draw_isometric(param);
+	printf("Iso draw\n");
 	window_ui_show_controls(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	mlx_close_hook(vars->mlx, event_onclose, param);
@@ -86,12 +88,13 @@ void	register_hooks(void *param)
 	mlx_scroll_hook(vars->mlx, event_onscroll, param);
 	mlx_cursor_hook(vars->mlx, event_oncursor_move, param);
 	mlx_loop(vars->mlx);
+	printf("Hooks registered\n");
 }
 
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
-	t_map		map;
+	t_map		*map;
 	t_camera	camera;
 
 	if (argc != 2)
@@ -107,9 +110,11 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	camera = camera_create((t_vector3){200, 1000, 0, 0},
+	printf("Map created\n");
+	camera = camera_create((t_vector3){20, 10, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
-	vars.map = &map;
+	printf("Cam created\n");
+	vars.map = map;
 	vars.camera = &camera;
 	vars.draw_line = 0;
 	register_hooks(&vars);

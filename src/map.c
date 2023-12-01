@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 14:47:48 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 10:35:42 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	map_draw_isometric(void *param)
 			vars->window_height);
 	while (x < vars->map->size_x)
 	{
-		y = -1;
-		while (++y < vars->map->size_y)
+		y = 0;
+		while (y < vars->map->size_y)
 		{
 			last_point = isometric_projection(vars->map->points[x][y], vars);
 			last_point.x += -vars->map->transform.position.x
@@ -87,6 +87,7 @@ void	map_draw_isometric(void *param)
 				+ vars->window_height / 2;
 			draw_dot(last_point, vars->draw_size, param,
 				vars->map->points[x][y].color);
+			y++;
 		}
 		x++;
 	}

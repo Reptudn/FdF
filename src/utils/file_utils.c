@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 14:17:25 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/01 10:27:03 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ t_vector3	convert_to_vector3(int x, int y, int z)
 	vector.y = y;
 	vector.z = z;
 	return (vector);
+}
+
+int	splitter(t_vector3 **map, char **contents, int i, int count)
+{
+	char	**split;
+	
+	if (ft_strchr(contents[i], ','))
+	{
+		split = ft_split(contents[i], ',');
+		if (!split)
+			return (0);
+		map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
+			hex_to_color(split[1])};
+	}
+	else
+		map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
+			hex_to_color("0xFFFFFF")};
+	return (1);
 }
 
 int	parse_line(t_vector3 **map, char *line, int count)
@@ -40,14 +58,17 @@ int	parse_line(t_vector3 **map, char *line, int count)
 		return (0);
 	while (contents[++i])
 	{
-		if (ft_strchr(contents[i], ',') && ft_split(contents[i], ','))
-			map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-				hex_to_color(ft_split(contents[i], ',')[1])};
-		else
-			map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-				hex_to_color("0xFFFFFF")};
+		// if (ft_strchr(contents[i], ',') && ft_split(contents[i], ','))
+		// 	map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
+		// 		hex_to_color(ft_split(contents[i], ',')[1])};
+		// else
+		// 	map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
+		// 		hex_to_color("0xFFFFFF")};
+		if (!splitter(map, contents, i, count))
+			return (0);
+		free(contents[i]);
 	}
-	return (len - 1);
+	return (len);
 }
 
 t_vector3	**get_map(int fd, t_map *map_struct)
@@ -62,17 +83,19 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 	if (!line)
 		return (0);
 	map_struct->size_y = 0;
-	while (line != 0)
+	while (line != 0 && map != 0)
 	{
 		map_struct->size_x = parse_line(map, line, map_struct->size_y);
 		if (map_struct->size_x <= 0)
 			return (0);
 		map_struct->size_y++;
+		free(line);
 		line = get_next_line(fd);
-		if (!line)
+		if (!line || line[0] == '\n')
 			break ;
 		map = (t_vector3 **)realloc(map,
 				sizeof(t_vector3 *) * (map_struct->size_y + 1));
+		printf("map_struct->size_y: %d\n", map_struct->size_y);
 	}
 	return (map);
 }

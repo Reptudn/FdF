@@ -1,4 +1,4 @@
-NAME	:= FdF
+NAME	:= fdf
 
 CFLAGS	:= -Wextra -Wall -Werror
 
