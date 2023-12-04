@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 10:28:56 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:47:04 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,20 @@ typedef enum e_projection
 	PROJECTION_FLAT = 2
 }				t_projection;
 
-typedef struct s_vector3
-{
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-}				t_vector3;
-
 typedef struct s_vector2
 {
 	int	x;
 	int	y;
 }				t_vector2;
+
+typedef struct s_vector3
+{
+	int			x;
+	int			y;
+	int			z;
+	int			color;
+	t_vector2	screen;
+}				t_vector3;
 
 typedef struct s_quaternion
 {
@@ -112,6 +113,12 @@ typedef struct s_3x3matrice
 {
 	int				matrice[3][3];
 }				t_3x3matrice;
+
+typedef struct s_gradient
+{
+	int				start;
+	int				end;
+}				t_gradient;
 
 typedef struct s_camera
 {
@@ -190,6 +197,8 @@ int				get_g(int rgba);
 int				get_b(int rgba);
 int				get_a(int rgba);
 int				get_rgba(int r, int g, int b, int a);
+int				color_difference(int color1, int color2);
+int				get_next_gradient_color(int start, int end, int steps, int *i);
 
 // draw
 void			draw_line_to_neighbours(t_vars *vars, t_vector2 curr_point,
@@ -199,7 +208,8 @@ void			draw_dot(t_vector2 middle_point,
 void			draw_square(t_vector2 middle_point, int size,
 					void *param, int color);
 void			draw_line(t_vector2 start, t_vector2 end, void *param,
-					int color);
+					t_gradient color);
+void			draw_all_lines(t_vars *vars);
 
 // math
 t_vector3		vector_add(t_vector3 vec1, t_vector3 vec2);
@@ -217,6 +227,8 @@ double			quaternion_angle_between(t_quaternion quaternion1,
 t_quaternion	quaternion_new(int x, int y, int z, int w);
 t_quaternion	angle_to_quaternion(float theta, t_vector3 axis);
 t_matrice		matrice_multiply(t_matrice matrice1, t_matrice matrice2);
+int				max(int a, int b);
+int				absolute(int a);
 
 // ui
 void			window_ui_show_controls(t_vars *vars);
@@ -229,7 +241,7 @@ void			debug_draw_info(t_vars *vars);
 
 // projection
 t_vector2		isometric_projection(t_vector3 input, t_vars *vars);
-void			map_draw_isometric(void *param);
+void			map_draw_isometric(t_vars *vars);
 void			map_draw(t_vars *vars);
 
 // utils

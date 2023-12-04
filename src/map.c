@@ -6,12 +6,11 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 10:29:09 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 13:20:32 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-#include <stdio.h>
 
 void	map_move(t_vector3 position, t_map *map)
 {
@@ -45,11 +44,10 @@ void	map_draw(t_vars *vars)
 		while (++y < vars->map->size_y)
 		{
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
-					y, vars->map->points[y][x].z, 0},
+					y, vars->map->points[y][x].z, 0, (t_vector2){0, 0}},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
 			coords_apply_offset(&last_point, &vars->map->points[y][x], vars);
-			draw_dot(last_point, vars->draw_size, vars,
-				vars->map->points[y][x].color);
+			vars->map->points[y][x].screen = last_point;
 		}
 	}
 	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
@@ -58,15 +56,13 @@ void	map_draw(t_vars *vars)
 /*
 **	Isometric Projection
 */
-void	map_draw_isometric(void *param)
+void	map_draw_isometric(t_vars *vars)
 {
 	int					x;
 	int					y;
 	t_vector2			last_point;
-	t_vars				*vars;
 
 	x = -1;
-	vars = (t_vars *)param;
 	mlx_delete_image(vars->mlx, vars->image);
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
@@ -80,8 +76,7 @@ void	map_draw_isometric(void *param)
 				+ vars->window_width / 2;
 			last_point.y += -vars->map->transform.position.y
 				+ vars->window_height / 2;
-			draw_dot(last_point, vars->draw_size, param,
-				vars->map->points[y][x].color);
+			vars->map->points[y][x].screen = last_point;
 		}
 	}
 	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
@@ -109,8 +104,7 @@ void	map_draw_flat(t_vars *vars)
 				* vars->window_height / vars->map->size_y * 0.8};
 			last_point.x -= vars->map->transform.position.x;
 			last_point.y -= vars->map->transform.position.y;
-			draw_dot(last_point, vars->draw_size,
-				vars, vars->map->points[y][x].color);
+			vars->map->points[y][x].screen = last_point;
 		}
 		x++;
 	}

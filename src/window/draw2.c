@@ -1,45 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   center_points.c                                    :+:      :+:    :+:   */
+/*   draw2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 09:38:44 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 12:22:14 by jkauker          ###   ########.fr       */
+/*   Created: 2023/12/04 13:33:00 by jkauker           #+#    #+#             */
+/*   Updated: 2023/12/04 13:46:21 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-void	center(t_vars *vars)
+void	draw_all_lines(t_vars *vars)
 {
-	int		x;
-	int		y;
-	int		delta_x;
-	int		delta_y;
+	int	x;
+	int	y;
+	int	start_color;
 
 	x = -1;
-	delta_x = vars->map->size_x / 2;
-	delta_y = vars->map->size_y / 2;
+	y = -1;
 	while (++x < vars->map->size_x)
 	{
 		y = -1;
 		while (++y < vars->map->size_y)
 		{
-			vars->map->points[y][x].x -= delta_x;
-			vars->map->points[y][x].y -= delta_y;
+			start_color = vars->map->points[y][x].color;
+			if (x + 1 < vars->map->size_x)
+				draw_line(vars->map->points[y][x].screen,
+					vars->map->points[y][x + 1].screen, vars,
+					(t_gradient){start_color,
+					vars->map->points[y][x + 1].color});
+			if (y + 1 < vars->map->size_y)
+				draw_line(vars->map->points[y][x].screen,
+					vars->map->points[y + 1][x].screen, vars,
+					(t_gradient){start_color,
+					vars->map->points[y + 1][x].color});
 		}
 	}
-}
-
-void	reset_tranform(t_vars *vars)
-{
-	t_map	*map;
-
-	map = vars->map;
-	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
-	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
-	vars->update = 1;
-	write(1, "Transform reset\n", 17);
 }

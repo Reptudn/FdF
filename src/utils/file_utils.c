@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 10:08:41 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 11:06:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	splitter(t_vector3 **map, char **contents, int i, int count)
 		if (!split)
 			return (0);
 		map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-			hex_to_color(split[1])};
+			hex_to_color(split[1]), (t_vector2){0, 0}};
 	}
 	else
 		map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
-			hex_to_color("0xFFFFFF")};
+			hex_to_color("0xFFFFFF"), (t_vector2){0, 0}};
 	return (1);
 }
 

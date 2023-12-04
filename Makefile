@@ -15,6 +15,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)map.c \
 			$(SRCDIR)debug.c \
 			$(SRCDIR)window/draw.c \
+			$(SRCDIR)window/draw2.c \
 			$(SRCDIR)window/window_ui.c \
 			$(SRCDIR)events/event_key.c \
 			$(SRCDIR)events/event_mouse.c \
@@ -24,6 +25,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)utils/vector_utils.c \
 			$(SRCDIR)utils/vector_utils2.c \
 			$(SRCDIR)utils/color_utils.c \
+			$(SRCDIR)utils/color_utils2.c \
 			$(SRCDIR)utils/hex_to_color.c \
 			$(SRCDIR)utils/center_points.c \
 			$(SRCDIR)utils/ft_realloc.c \

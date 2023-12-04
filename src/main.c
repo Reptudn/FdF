@@ -6,11 +6,20 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:40:21 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 12:24:42 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+/*
+**	This function is only here because if norm lol
+*/
+void	close_file(int fd)
+{
+	close(fd);
+	write(1, "\nMap read complete without errors.\n", 36);
+}
 
 t_map	*create_map(char *map_name, int fd, t_vars *vars)
 {
@@ -34,10 +43,10 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 		debug_error("Could not create map");
 		exit(1);
 	}
-	map->transform.position = (t_vector3){0, 0, 0, 0};
+	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = map;
-	close(fd);
+	close_file(fd);
 	return (map);
 }
 
@@ -55,6 +64,7 @@ void	gameloop(void *param)
 		map_draw_flat(vars);
 	else
 		map_draw_isometric(param);
+	draw_all_lines(vars);
 	window_ui_show_controls(vars);
 	debug_draw_info(vars);
 	vars->update = 0;
@@ -78,6 +88,7 @@ void	register_hooks(void *param)
 	vars->mouse.prev_y = 0;
 	center(vars);
 	map_draw_isometric(param);
+	draw_all_lines(vars);
 	window_ui_show_controls(vars);
 	mlx_key_hook(vars->mlx, event_onkey, param);
 	mlx_close_hook(vars->mlx, event_onclose, param);
@@ -107,7 +118,7 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	camera = camera_create((t_vector3){20, 10, 0, 0},
+	camera = camera_create((t_vector3){20, 10, 0, 0, (t_vector2){0, 0}},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
 	vars.map = map;
 	vars.camera = &camera;

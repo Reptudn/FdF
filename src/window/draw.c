@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:10:33 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:01:48 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_line
 	int			sx;
 	int			sy;
 	int			err;
+	int			i;
 }				t_line;
 
 t_line	initialize_line(t_vector2 start, t_vector2 end)
@@ -43,6 +44,7 @@ t_line	initialize_line(t_vector2 start, t_vector2 end)
 		line.err = line.dx / 2;
 	else
 		line.err = -line.dy / 2;
+	line.i = -1;
 	return (line);
 }
 
@@ -111,7 +113,7 @@ void	draw_square(t_vector2 middle_point, int size,
 ** It uses the Bresenham's line algorithm.
 ** https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 */
-void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
+void	draw_line(t_vector2 start, t_vector2 end, void *param, t_gradient color)
 {
 	int		e2;
 	t_line	line;
@@ -121,7 +123,9 @@ void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
 	line = initialize_line(start, end);
 	while (1)
 	{
-		draw_dot((t_vector2){line.start.x, line.start.y}, 1, param, color);
+		draw_dot((t_vector2){line.start.x, line.start.y},
+			1, param, get_next_gradient_color(color.start, color.end,
+				max(abs(line.dx), abs(line.dy)), &line.i));
 		if (line.start.x == line.end.x && line.start.y == line.end.y)
 			break ;
 		e2 = line.err;

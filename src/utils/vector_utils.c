@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:58 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/24 08:35:54 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 12:21:57 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ double	vector_length(t_vector3 vec)
 
 t_vector3	vector_new(int x, int y, int z, int color)
 {
-	return ((t_vector3){x, y, z, color});
+	return ((t_vector3){x, y, z, color, (t_vector2){0, 0}});
 }
