@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 10:33:03 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:07:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	event_onclose(void *param)
 	write(1, "Window closed.\n", 15);
 	exit(0);
 }
-
 
 /*
 ** This is being called once something failes during intitialization

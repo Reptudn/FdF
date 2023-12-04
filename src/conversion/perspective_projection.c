@@ -6,11 +6,30 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:33:41 by jonask            #+#    #+#             */
-/*   Updated: 2023/11/27 11:46:57 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:18:12 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
+
+void	point_to_matrice2(t_matrice *matrice, t_transform transform)
+{
+	matrice->matrice[1][2] = 2.0f
+		* ((transform.rotation.x * transform.rotation.y)
+			- (transform.rotation.w * transform.rotation.x));
+	matrice->matrice[2][0] = 2.0f
+		* ((transform.rotation.x * transform.rotation.z)
+			- (transform.rotation.w * transform.rotation.y));
+	matrice->matrice[2][1] = 2.0f
+		* ((transform.rotation.y * transform.rotation.z)
+			+ (transform.rotation.w * transform.rotation.x));
+	matrice->matrice[2][2] = 1.0f - 2.0f
+		* (pow(transform.rotation.x, 2) + pow(transform.rotation.y, 2));
+	matrice->matrice[3][0] = 0.0f;
+	matrice->matrice[3][1] = 0.0f;
+	matrice->matrice[3][2] = 0.0f;
+	matrice->matrice[3][3] = 1.0f;
+}
 
 /*
 **	The point_to_matrice function is used to convert
@@ -19,7 +38,6 @@
 **	3D transformation of the point in space.
 **	-> PERSPECTIVE PROJECTION
 */
-
 void	point_to_matrice(t_transform transform, t_matrice *matrice)
 {
 	matrice->matrice[0][3] = transform.position.x;
@@ -38,21 +56,7 @@ void	point_to_matrice(t_transform transform, t_matrice *matrice)
 			+ (transform.rotation.w * transform.rotation.z));
 	matrice->matrice[1][1] = 1.0f - 2.0f
 		* (pow(transform.rotation.x, 2) + pow(transform.rotation.z, 2));
-	matrice->matrice[1][2] = 2.0f
-		* ((transform.rotation.x * transform.rotation.y)
-			- (transform.rotation.w * transform.rotation.x));
-	matrice->matrice[2][0] = 2.0f
-		* ((transform.rotation.x * transform.rotation.z)
-			- (transform.rotation.w * transform.rotation.y));
-	matrice->matrice[2][1] = 2.0f
-		* ((transform.rotation.y * transform.rotation.z)
-			+ (transform.rotation.w * transform.rotation.x));
-	matrice->matrice[2][2] = 1.0f - 2.0f
-		* (pow(transform.rotation.x, 2) + pow(transform.rotation.y, 2));
-	matrice->matrice[3][0] = 0.0f;
-	matrice->matrice[3][1] = 0.0f;
-	matrice->matrice[3][2] = 0.0f;
-	matrice->matrice[3][3] = 1.0f;
+	point_to_matrice2(matrice, transform);
 }
 
 t_matrice	matrice_multiply(t_matrice matrice1, t_matrice matrice2)
@@ -90,6 +94,23 @@ t_matrice	matrice_multiply(t_matrice matrice1, t_matrice matrice2)
 **	separately for the x and y coordinates.
 */
 
+void	get_coords_from_matrice(t_transform transform, t_matrice matrice,
+	t_vector2 *coordinates, float *perspective)
+{
+	coordinates->x = matrice.matrice[0][0] * transform.position.x
+		+ matrice.matrice[0][1] * transform.position.y
+		+ matrice.matrice[0][2] * transform.position.z
+		+ matrice.matrice[0][3];
+	coordinates->y = matrice.matrice[1][0] * transform.position.x
+		+ matrice.matrice[1][1] * transform.position.y
+		+ matrice.matrice[1][2] * transform.position.z
+		+ matrice.matrice[1][3];
+	*perspective = matrice.matrice[2][0] * transform.position.x
+		+ matrice.matrice[2][1] * transform.position.y
+		+ matrice.matrice[2][2] * transform.position.z
+		+ matrice.matrice[2][3];
+}
+
 t_vector2	get_screen_coordinates(t_transform transform, t_map *map)
 {
 	t_vector2	coordinates;
@@ -103,17 +124,7 @@ t_vector2	get_screen_coordinates(t_transform transform, t_map *map)
 	point_to_matrice(transform, &matrice);
 	point_to_matrice(map->transform, &projection);
 	matrice = matrice_multiply(matrice, projection);
-	coordinates.x = matrice.matrice[0][0] * transform.position.x
-		+ matrice.matrice[0][1] * transform.position.y
-		+ matrice.matrice[0][2] * transform.position.z + matrice.matrice[0][3];
-	coordinates.y = matrice.matrice[1][0] * transform.position.x
-		+ matrice.matrice[1][1] * transform.position.y
-		+ matrice.matrice[1][2] * transform.position.z
-		+ matrice.matrice[1][3];
-	perspective = matrice.matrice[2][0] * transform.position.x
-		+ matrice.matrice[2][1] * transform.position.y
-		+ matrice.matrice[2][2] * transform.position.z
-		+ matrice.matrice[2][3];
+	get_coords_from_matrice(transform, matrice, &coordinates, &perspective);
 	if (perspective != 0)
 	{
 		coordinates.x /= perspective;

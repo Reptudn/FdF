@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:54:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 14:00:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:07:01 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_next_gradient_color(int start, int end, int steps, int *i)
 	int		a;
 	int		gradient;
 
-	if (steps == 0)
+	if (steps == 0 || start == end)
 		return (start);
 	gradient = color_difference(start, end);
 	r = get_r(start) + (get_r(gradient) * (*i) / steps);
@@ -51,4 +51,3 @@ int	get_next_gradient_color(int start, int end, int steps, int *i)
 	*i += 1;
 	return (get_rgba(r, g, b, a));
 }
-
