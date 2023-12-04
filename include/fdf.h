@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 13:15:07 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:40:25 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void			event_onkey(mlx_key_data_t keycode, void *param);
 void			event_onmouse(mlx_key_data_t keycode, void *param);
 void			event_onscroll(double xdelta, double ydelta, void *param);
 void			event_onclose(void *param);
+void			event_onfail(void *param, int rows);
 void			event_oncursor_move(double x, double y, void *param);
 
 // vector to 2d conversion

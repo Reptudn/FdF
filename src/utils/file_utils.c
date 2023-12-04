@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 14:04:45 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:40:41 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_vector3	convert_to_vector3(int x, int y, int z)
 int	splitter(t_vector3 **map, char **contents, int i, int count)
 {
 	char	**split;
-	
+
 	if (ft_strchr(contents[i], ','))
 	{
 		split = ft_split(contents[i], ',');
@@ -62,6 +62,7 @@ int	parse_line(t_vector3 **map, char *line, int count)
 			return (0);
 		free(contents[i]);
 	}
+	free(contents);
 	write(1, ".", 1);
 	return (len - 1);
 }
@@ -83,7 +84,7 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 	{
 		map_struct->size_x = parse_line(map, line, map_struct->size_y);
 		if (map_struct->size_x <= 0)
-			return (0);
+			event_onfail(map_struct, map_struct->size_y);
 		map_struct->size_y++;
 		free(line);
 		line = get_next_line(fd);

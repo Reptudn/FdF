@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 14:03:49 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:40:21 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 
 	if (fd == -1)
 	{
-		debug_error("Could not open file");
+		write(1, "Could not open file!\n", 21);
 		exit(1);
 	}
 	map = malloc(sizeof(t_map));
@@ -37,7 +37,7 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	map->transform.position = (t_vector3){0, 0, 0, 0};
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = map;
-	center(vars);
+	close(fd);
 	return (map);
 }
 
@@ -107,10 +107,8 @@ int	main(int argc, char **argv)
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
-	printf("Map created\n");
 	camera = camera_create((t_vector3){20, 10, 0, 0},
 			(t_quaternion){0, 0, 0, 0}, CAMERA_DEFAULT_FOV);
-	printf("Cam created\n");
 	vars.map = map;
 	vars.camera = &camera;
 	vars.draw_line = 0;

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/11/27 12:38:37 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:10:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	draw_square(t_vector2 middle_point, int size,
 ** It uses the Bresenham's line algorithm.
 ** https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 */
-
 void	draw_line(t_vector2 start, t_vector2 end, void *param, int color)
 {
 	int		e2;
