@@ -27,6 +27,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)utils/hex_to_color.c \
 			$(SRCDIR)utils/center_points.c \
 			$(SRCDIR)utils/ft_realloc.c \
+			$(SRCDIR)utils/coordinate_transformation.c \
 			$(SRCDIR)conversion/perspective_projection.c \
 			$(SRCDIR)conversion/isometric.c \
 

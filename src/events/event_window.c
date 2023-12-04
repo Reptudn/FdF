@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:51:31 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 10:33:03 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	event_onclose(void *param)
 	x = -1;
 	vars = (t_vars *)param;
 	write(1, "\nClosing window...\n", 20);
-	while (++x < vars->map->size_x)
+	while (++x < vars->map->size_y)
 		free(vars->map->points[x]);
 	free(vars->map->points);
 	free(vars->map);

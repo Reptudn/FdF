@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:27:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 10:29:09 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void	map_rotate(double rotation, t_vector3 axis, t_map *map)
 			rotation_quaternion);
 }
 
-void	map_draw(void *param)
+/*
+**	Perspective Projection
+*/
+void	map_draw(t_vars *vars)
 {
 	int					x;
 	int					y;
 	t_vector2			last_point;
-	t_vars				*vars;
 
 	x = -1;
-	vars = (t_vars *)param;
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
 	while (++x < vars->map->size_x)
@@ -46,17 +47,17 @@ void	map_draw(void *param)
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
 					y, vars->map->points[y][x].z, 0},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
-			last_point.x += vars->window_width / 2
-				+ vars->map->transform.position.x + vars->map->points[y][x].x;
-			last_point.y += vars->window_height / 2
-				+ vars->map->transform.position.y + vars->map->points[y][x].y;
-			draw_dot(last_point, vars->draw_size, param,
+			coords_apply_offset(&last_point, &vars->map->points[y][x], vars);
+			draw_dot(last_point, vars->draw_size, vars,
 				vars->map->points[y][x].color);
 		}
 	}
 	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
 }
 
+/*
+**	Isometric Projection
+*/
 void	map_draw_isometric(void *param)
 {
 	int					x;
@@ -86,6 +87,9 @@ void	map_draw_isometric(void *param)
 	mlx_image_to_window(vars->mlx, vars->image, 0, 0);
 }
 
+/*
+**	Flat Projection
+*/
 void	map_draw_flat(t_vars *vars)
 {
 	int			x;

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:48:49 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 10:28:56 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ typedef struct s_vars
 t_vector3		**get_map(int fd, t_map *map_struct);
 
 // map
-void			map_draw(void *param);
 void			map_move(t_vector3 position, t_map *map);
 void			center(t_vars *vars);
 void			reset_tranform(t_vars *vars);
@@ -231,8 +230,11 @@ void			debug_draw_info(t_vars *vars);
 // projection
 t_vector2		isometric_projection(t_vector3 input, t_vars *vars);
 void			map_draw_isometric(void *param);
+void			map_draw(t_vars *vars);
 
 // utils
 void			*ft_realloc(void *ptr, size_t size);
+void			coords_apply_offset(t_vector2 *point, t_vector3 *base,
+					t_vars *vars);
 
 #endif
