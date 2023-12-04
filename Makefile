@@ -26,6 +26,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)utils/color_utils.c \
 			$(SRCDIR)utils/hex_to_color.c \
 			$(SRCDIR)utils/center_points.c \
+			$(SRCDIR)utils/ft_realloc.c \
 			$(SRCDIR)conversion/perspective_projection.c \
 			$(SRCDIR)conversion/isometric.c \
 
@@ -35,7 +36,7 @@ CC		:= gcc
 
 .PHONY: all, clean, fclean, re, libmlx
 
-all: libmlx $(NAME) clean
+all: libmlx $(NAME)
 
 libft:
 	@make -C ./lib/libft

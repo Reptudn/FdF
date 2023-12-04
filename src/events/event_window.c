@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:43:26 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:51:31 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	event_onclose(void *param)
 	free(vars->map->points);
 	free(vars->map);
 	mlx_terminate(vars->mlx);
-	write(1, "Window closed\n", 14);
+	write(1, "Window closed.\n", 15);
 	exit(0);
 }
 

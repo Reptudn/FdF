@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 09:40:41 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/04 09:48:52 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 		line = get_next_line(fd);
 		if (!line || line[0] == '\n')
 			break ;
-		map = (t_vector3 **)realloc(map,
+		map = (t_vector3 **)ft_realloc(map,
 				sizeof(t_vector3 *) * (map_struct->size_y + 1));
 	}
 	return (map);
