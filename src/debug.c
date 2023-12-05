@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:17:38 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:08:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:10:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	debug_print_map(t_map map)
 void	debug_draw_info(t_vars *vars)
 {
 	ft_printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	ft_printf("\t\t-[Info]-\n");
+	ft_printf("FdF\t       -[Info]-\n");
 	ft_printf("Window Width: \t\t%d\n", vars->window_width);
 	ft_printf("Window Height: \t\t%d\n", vars->window_height);
 	ft_printf("Draw Size: \t\t%d\n", vars->draw_size);

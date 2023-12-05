@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:01:54 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:23:48 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,7 @@ void	map_draw_flat(t_vars *vars)
 			last_point = (t_vector2){x * vars->window_width
 				/ vars->map->size_x * 0.8, y
 				* vars->window_height / vars->map->size_y * 0.8};
-			last_point.x -= vars->map->transform.position.x;
-			last_point.y -= vars->map->transform.position.y;
-			last_point.x *= vars->camera->zoom;
-			last_point.y *= vars->camera->zoom;
+			coords_apply_flat_offset(vars, &last_point);
 			vars->map->points[y][x].screen = last_point;
 		}
 		x++;

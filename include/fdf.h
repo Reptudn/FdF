@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:02:39 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:23:13 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,5 +248,6 @@ void			map_draw(t_vars *vars);
 void			*ft_realloc(void *ptr, size_t size);
 void			coords_apply_offset(t_vector2 *point, t_vector3 *base,
 					t_vars *vars);
+void			coords_apply_flat_offset(t_vars *vars, t_vector2 *point);
 
 #endif

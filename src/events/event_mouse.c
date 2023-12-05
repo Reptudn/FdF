@@ -6,26 +6,22 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:13:33 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:00:53 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:15:55 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
+#include <unistd.h>
 
 void	event_onscroll(double xdelta, double ydelta, void *param)
 {
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
-	if (xdelta < 0)
-	{
-		vars->camera->zoom -= 0.25;
-	}
-	else if (xdelta > 0)
-	{
-		vars->camera->zoom += 0.25;
-	}
-	ydelta = 0;
+	if (xdelta < 0 || ydelta < 0)
+		vars->camera->zoom -= 0.05;
+	else if (xdelta > 0 || ydelta > 0)
+		vars->camera->zoom += 0.05;
 	vars->update = 1;
 }
 

@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:38:44 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 12:22:14 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:32:29 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ void	reset_tranform(t_vars *vars)
 	map = vars->map;
 	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
+	vars->camera->transform = (t_transform){(t_vector3){200, 300, 0, 0,
+		(t_vector2){0, 0}},
+		(t_quaternion){0, 0, 0, 0}};
+	vars->camera->zoom = 1;
 	vars->update = 1;
 	write(1, "Transform reset\n", 17);
 }
