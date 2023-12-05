@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:17:38 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:10:37 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:56:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	debug_draw_info(t_vars *vars)
 	ft_printf("Map Name: \t\t%s\n", vars->map->map_name);
 	ft_printf("Map Size X: \t\t%d\n", vars->map->size_x);
 	ft_printf("Map Size Y: \t\t%d\n", vars->map->size_y);
-	ft_printf("Camera Zoom: \t\t%d\n", vars->camera->zoom);
 	ft_printf("Map Position: \t\t%d, %d, %d\n", vars->map->transform.position.x,
 		vars->map->transform.position.y, vars->map->transform.position.z);
 	ft_printf("Map Rotation: \t\t%d, %d, %d\n", vars->map->transform.rotation.x,

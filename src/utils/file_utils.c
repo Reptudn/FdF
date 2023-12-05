@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 11:06:37 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:55:27 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_line(t_vector3 **map, char *line, int count)
 	}
 	free(contents);
 	write(1, ".", 1);
-	return (len - 1);
+	return (len);
 }
 
 t_vector3	**get_map(int fd, t_map *map_struct)

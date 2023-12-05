@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:12:26 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:50:44 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	rotation(mlx_key_data_t keycode, t_vars *vars)
 {
 	if (keycode.key == MLX_KEY_I)
-		map_rotate(100, (t_vector3){100, 0, 0, 0,
+		map_rotate(100, (t_vector3){25, 0, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_K)
-		map_rotate(-100, (t_vector3){100, 0, 0, 0,
+		map_rotate(-100, (t_vector3){25, 0, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_J)
-		map_rotate(100, (t_vector3){0, 100, 0, 0,
+		map_rotate(100, (t_vector3){0, 25, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_L)
-		map_rotate(-100, (t_vector3){0, 100, 0, 0,
+		map_rotate(-100, (t_vector3){0, 25, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_I || keycode.key == MLX_KEY_K
 		|| keycode.key == MLX_KEY_J || keycode.key == MLX_KEY_L)
@@ -34,16 +34,16 @@ void	rotation(mlx_key_data_t keycode, t_vars *vars)
 void	movement(mlx_key_data_t keycode, t_vars *vars)
 {
 	if (keycode.key == MLX_KEY_W)
-		map_move((t_vector3){0, 50, 0, 0,
+		map_move((t_vector3){0, 100, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_S)
-		map_move((t_vector3){0, -50, 0, 0,
+		map_move((t_vector3){0, -100, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_A)
-		map_move((t_vector3){50, 0, 0, 0,
+		map_move((t_vector3){100, 0, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_D)
-		map_move((t_vector3){-50, 0, 0, 0,
+		map_move((t_vector3){-100, 0, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_W || keycode.key == MLX_KEY_S
 		|| keycode.key == MLX_KEY_A || keycode.key == MLX_KEY_D)
