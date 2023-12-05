@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:13:33 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/01 10:21:08 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:00:53 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	event_onscroll(double xdelta, double ydelta, void *param)
 	vars = (t_vars *)param;
 	if (xdelta < 0)
 	{
-		vars->camera->fov -= 0.25;
+		vars->camera->zoom -= 0.25;
 	}
 	else if (xdelta > 0)
 	{
-		vars->camera->fov += 0.25;
+		vars->camera->zoom += 0.25;
 	}
 	ydelta = 0;
 	vars->update = 1;

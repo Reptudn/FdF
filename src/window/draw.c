@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:08 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 14:01:48 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 08:59:31 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	draw_line(t_vector2 start, t_vector2 end, void *param, t_gradient color)
 	while (1)
 	{
 		draw_dot((t_vector2){line.start.x, line.start.y},
-			1, param, get_next_gradient_color(color.start, color.end,
+			1, param, get_next_gradient_color(color.end, color.start,
 				max(abs(line.dx), abs(line.dy)), &line.i));
 		if (line.start.x == line.end.x && line.start.y == line.end.y)
 			break ;

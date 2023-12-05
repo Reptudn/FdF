@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:54:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 14:07:01 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 08:58:11 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	color_difference(int color1, int color2)
 {
+	if (color1 > color2)
+		return (get_rgba(get_r(color1) - get_r(color2),
+				get_g(color1) - get_g(color2),
+				get_b(color1) - get_b(color2), 255));
 	return (get_rgba(get_r(color2) - get_r(color1),
 			get_g(color2) - get_g(color1),
 			get_b(color2) - get_b(color1), 255));

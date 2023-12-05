@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 13:47:04 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:02:39 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_camera
 	t_transform		transform;
 	float			near;
 	float			far;
-	double			fov;
+	double			zoom;
 }				t_camera;
 
 typedef struct s_map
@@ -188,7 +188,7 @@ t_vector2		to_screen(t_vector3 point, t_vars *vars);
 // camera
 void			camera_move(t_camera *cam, t_transform transform);
 t_camera		camera_create(t_vector3 position, t_quaternion rotation,
-					double fov);
+					double zoom);
 
 // color utils
 int				hex_to_color(char *str);

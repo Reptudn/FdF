@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 13:20:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/05 09:01:54 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	map_draw(t_vars *vars)
 			last_point = get_screen_coordinates((t_transform){(t_vector3){x,
 					y, vars->map->points[y][x].z, 0, (t_vector2){0, 0}},
 					(t_quaternion){0, 0, 0, 0}}, vars->map);
+			last_point.x *= vars->camera->zoom;
+			last_point.y *= vars->camera->zoom;
 			coords_apply_offset(&last_point, &vars->map->points[y][x], vars);
 			vars->map->points[y][x].screen = last_point;
 		}
@@ -76,6 +78,8 @@ void	map_draw_isometric(t_vars *vars)
 				+ vars->window_width / 2;
 			last_point.y += -vars->map->transform.position.y
 				+ vars->window_height / 2;
+			last_point.x *= vars->camera->zoom;
+			last_point.y *= vars->camera->zoom;
 			vars->map->points[y][x].screen = last_point;
 		}
 	}
@@ -104,6 +108,8 @@ void	map_draw_flat(t_vars *vars)
 				* vars->window_height / vars->map->size_y * 0.8};
 			last_point.x -= vars->map->transform.position.x;
 			last_point.y -= vars->map->transform.position.y;
+			last_point.x *= vars->camera->zoom;
+			last_point.y *= vars->camera->zoom;
 			vars->map->points[y][x].screen = last_point;
 		}
 		x++;
