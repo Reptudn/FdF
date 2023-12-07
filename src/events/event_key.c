@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:50:44 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:32:28 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	utilities(mlx_key_data_t keycode, t_vars *vars)
 		vars->map->transform = (t_transform){(t_vector3){0, 0, 0,
 			0, (t_vector2){0, 0}},
 			(t_quaternion){0, 0, 0, 0}};
-		vars->camera->zoom = 1.0;
+		vars->camera->zoom = 0.3;
 		vars->update = 1;
 	}
 }

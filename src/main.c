@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 09:15:18 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:31:58 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int argc, char **argv)
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
 	camera = camera_create((t_vector3){20, 10, 0, 0, (t_vector2){0, 0}},
-			(t_quaternion){0, 0, 0, 0}, 1.0);
+			(t_quaternion){0, 0, 0, 0}, 0.3);
 	vars.map = map;
 	vars.camera = &camera;
 	vars.draw_line = 0;
