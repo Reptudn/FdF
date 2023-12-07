@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/04 14:07:22 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:22:33 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	event_onresize(int x, int y, void *param)
 	vars->update = 1;
 	vars->window_width = x;
 	vars->window_height = y;
+	mlx_resize_image(vars->image, x, y);
 }
 
 /*

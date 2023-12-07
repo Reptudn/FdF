@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:34 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:23:48 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:18:14 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	map_draw(t_vars *vars)
 	t_vector2			last_point;
 
 	x = -1;
+	mlx_delete_image(vars->mlx, vars->image);
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
 	while (++x < vars->map->size_x)
@@ -96,6 +97,7 @@ void	map_draw_flat(t_vars *vars)
 	t_vector2	last_point;
 
 	x = 0;
+	mlx_delete_image(vars->mlx, vars->image);
 	vars->image = mlx_new_image(vars->mlx, vars->window_width,
 			vars->window_height);
 	while (x < vars->map->size_x)

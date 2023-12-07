@@ -6,17 +6,20 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 09:01:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:15:18 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdlib.h>
 
 /*
 **	This function is only here because if norm lol
 */
-void	close_file(int fd)
+void	close_file(int fd, t_map *map)
 {
+	if (map->points == 0)
+		free(map);
 	get_next_line(-1);
 	close(fd);
 	write(1, "\nMap read complete without errors.\n", 36);
@@ -39,6 +42,7 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	}
 	map->map_name = map_name;
 	map->points = get_map(fd, map);
+	close_file(fd, map);
 	if (map->points == 0)
 	{
 		debug_error("Could not create map");
@@ -47,7 +51,6 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};
 	vars->map = map;
-	close_file(fd);
 	return (map);
 }
 
@@ -112,7 +115,7 @@ int	main(int argc, char **argv)
 			ft_strjoin("FdF by jkauker | Map: ", argv[1]), true);
 	if (!vars.mlx)
 	{
-		debug_error("Could not initialize mlx");
+		debug_error("Could not initialize mlx!");
 		return (RUN_ERROR);
 	}
 	map = create_map(argv[1], open(argv[1], O_RDONLY), &vars);
