@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:11:20 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 09:01:32 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 */
 void	close_file(int fd)
 {
+	get_next_line(-1);
 	close(fd);
 	write(1, "\nMap read complete without errors.\n", 36);
 }
@@ -105,11 +106,8 @@ int	main(int argc, char **argv)
 	t_map		*map;
 	t_camera	camera;
 
-	if (argc != 2)
-	{
-		debug_error("No file given!");
+	if (check_input(argc, argv) == 0)
 		return (RUN_ERROR);
-	}
 	vars.mlx = mlx_init(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT,
 			ft_strjoin("FdF by jkauker | Map: ", argv[1]), true);
 	if (!vars.mlx)

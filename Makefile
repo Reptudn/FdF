@@ -14,6 +14,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)main.c \
 			$(SRCDIR)map.c \
 			$(SRCDIR)debug.c \
+			$(SRCDIR)check_input.c \
 			$(SRCDIR)window/draw.c \
 			$(SRCDIR)window/draw2.c \
 			$(SRCDIR)window/window_ui.c \
