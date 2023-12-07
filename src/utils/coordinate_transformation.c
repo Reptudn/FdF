@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:11:19 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/05 09:22:38 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 10:35:43 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	coords_apply_flat_offset(t_vars *vars, t_vector2 *point)
 	point->y -= vars->map->transform.position.y;
 	point->x -= vars->window_width / 2;
 	point->y -= vars->window_height / 2;
-	point->x *= vars->camera->zoom;
-	point->y *= vars->camera->zoom;
+	point->x *= vars->camera->zoom * 0.7;
+	point->y *= vars->camera->zoom * 0.7;
 	point->x += vars->window_width / 2;
 	point->y += vars->window_height / 2;
 }

@@ -1,6 +1,7 @@
 *.out
 *.o
 *.a
+*.tmp
 .vscode
 .DS_Store
 FdF
