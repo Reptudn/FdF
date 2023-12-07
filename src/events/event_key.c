@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 09:12:52 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 09:32:28 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 11:05:37 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ void	rotation(mlx_key_data_t keycode, t_vars *vars)
 	if (keycode.key == MLX_KEY_L)
 		map_rotate(-100, (t_vector3){0, 25, 0, 0,
 			(t_vector2){0, 0}}, vars->map);
+	if (keycode.key == MLX_KEY_U)
+		map_rotate(100, (t_vector3){0, 0, 25, 0,
+			(t_vector2){0, 0}}, vars->map);
+	if (keycode.key == MLX_KEY_O)
+		map_rotate(-100, (t_vector3){0, 0, 25, 0,
+			(t_vector2){0, 0}}, vars->map);
 	if (keycode.key == MLX_KEY_I || keycode.key == MLX_KEY_K
-		|| keycode.key == MLX_KEY_J || keycode.key == MLX_KEY_L)
+		|| keycode.key == MLX_KEY_J || keycode.key == MLX_KEY_L
+		|| keycode.key == MLX_KEY_U || keycode.key == MLX_KEY_O)
 		vars->update = 1;
 }
 

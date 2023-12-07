@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:28:22 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 10:32:47 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/07 11:01:34 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	point_to_iso(int *x, int *y, int z, t_vars *vars)
 
 	previous_x = *x;
 	previous_y = *y;
-	previous_x *= vars->window_width / 2;
-	previous_y *= vars->window_height / 2;
-	previous_x *= vars->camera->zoom * 0.7;
-	previous_y *= vars->camera->zoom * 0.7;
-	previous_x += vars->window_width / 2;
-	previous_y += vars->window_height / 2;
+	previous_x *= vars->window_width / 5;
+	previous_y *= vars->window_height / 5;
+	previous_x *= vars->camera->zoom;
+	previous_y *= vars->camera->zoom;
+	previous_x += vars->window_width / 5;
+	previous_y += vars->window_height / 5;
 	*x = (previous_x - previous_y);
 	*y = -z + (previous_x + previous_y) / 2;
 }
