@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 15:07:18 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:11:48 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	event_onresize(int x, int y, void *param)
 
 /*
 ** This is being called once the window closes
+** system("leaks fdf"); proof
 */
 void	event_onclose(void *param)
 {
@@ -40,8 +41,6 @@ void	event_onclose(void *param)
 	free(vars->map);
 	mlx_delete_image(vars->mlx, vars->image);
 	mlx_terminate(vars->mlx);
-	write(1, "Window closed.\n", 15);
-	system("leaks fdf");
 	exit(0);
 }
 
