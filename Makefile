@@ -17,6 +17,7 @@ SRCS	:=  $(SRCDIR)camera.c \
 			$(SRCDIR)check_input.c \
 			$(SRCDIR)window/draw.c \
 			$(SRCDIR)window/draw2.c \
+			$(SRCDIR)window/draw_one.c \
 			$(SRCDIR)window/window_ui.c \
 			$(SRCDIR)events/event_key.c \
 			$(SRCDIR)events/event_mouse.c \

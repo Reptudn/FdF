@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 09:31:58 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 13:53:59 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,14 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	}
 	map = malloc(sizeof(t_map));
 	if (!map)
-	{
-		debug_error("Could not allocate memory for map");
 		exit(1);
-	}
 	map->map_name = map_name;
 	map->points = get_map(fd, map);
 	close_file(fd, map);
 	if (map->points == 0)
 	{
-		debug_error("Could not create map");
+		free(map->map_name);
+		free(map);
 		exit(1);
 	}
 	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
@@ -61,6 +59,11 @@ void	gameloop(void *param)
 	vars = (t_vars *)param;
 	if (vars->update == 0 || vars->run == 0)
 		return ;
+	if (vars->map->size_x == 1 && vars->map->size_y == 1)
+	{
+		draw_one(vars);
+		return ;
+	}
 	mlx_delete_image(vars->mlx, vars->image);
 	if (vars->projection == PROJECTION_PERSPECTIVE)
 		map_draw(param);

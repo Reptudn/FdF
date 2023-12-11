@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:14:15 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/07 10:42:27 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 13:57:09 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ int	splitter(t_vector3 **map, char **contents, int i, int count)
 	{
 		split = ft_split(contents[i], ',');
 		if (!split)
-			return (0);
+		{
+			while (contents[i])
+				free(contents[i++]);
+			return (free(contents), 0);
+		}
 		map[count][i] = (t_vector3){count, i, ft_atoi(contents[i]),
 			hex_to_color(split[1]), (t_vector2){0, 0}};
 		free(split[0]);
@@ -59,7 +63,7 @@ int	parse_line(t_vector3 **map, char *line, int count)
 		len++;
 	map[count] = (t_vector3 *)ft_calloc((len), sizeof(t_vector3));
 	if (!map[count])
-		return (0);
+		return (free(contents), 0);
 	while (contents[++i])
 	{
 		if (!splitter(map, contents, i, count))
@@ -76,13 +80,13 @@ t_vector3	**get_map(int fd, t_map *map_struct)
 	t_vector3	**map;
 	char		*line;
 
-	write(1, "Reading map", 12);
 	map = (t_vector3 **)malloc(sizeof(t_vector3 **));
-	if (!map)
-		return (0);
 	line = get_next_line(fd);
-	if (!line)
+	if (!map || !line)
+	{
+		free(map);
 		return (0);
+	}
 	map_struct->size_y = 0;
 	while (line != 0 && map != 0)
 	{
