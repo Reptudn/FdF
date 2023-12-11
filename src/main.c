@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 13:53:59 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 15:09:51 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ int	main(int argc, char **argv)
 	t_map		*map;
 	t_camera	camera;
 
+
 	if (check_input(argc, argv) == 0)
 		return (RUN_ERROR);
 	vars.mlx = mlx_init(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT,
-			ft_strjoin("FdF by jkauker | Map: ", argv[1]), true);
+			"FdF by jkauker", true);
 	if (!vars.mlx)
 	{
 		debug_error("Could not initialize mlx!");
