@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 15:11:48 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 16:57:13 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	event_onclose(void *param)
 	free(vars->map);
 	mlx_delete_image(vars->mlx, vars->image);
 	mlx_terminate(vars->mlx);
-	exit(0);
+	ft_exit(0);
 }
 
 /*
@@ -60,5 +60,11 @@ void	event_onfail(void *param, int rows)
 	free(vars->map);
 	mlx_terminate(vars->mlx);
 	write(1, "Woops! Something failed to initialize. Closing window\n", 55);
-	exit(0);
+	ft_exit(0);
+}
+
+void	ft_exit(int exitcode)
+{
+	system("leaks fdf");
+	exit(exitcode);
 }

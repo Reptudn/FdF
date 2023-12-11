@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:45 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 13:22:32 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 16:56:39 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,5 +252,6 @@ void			coords_apply_flat_offset(t_vars *vars, t_vector2 *point);
 int				check_input(int argc, char **argv);
 
 void			draw_one(t_vars *vars);
+void			ft_exit(int exitcode);
 
 #endif

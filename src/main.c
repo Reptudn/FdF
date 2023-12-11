@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 15:09:51 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/11 16:57:46 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	if (fd == -1)
 	{
 		write(1, "Could not open file!\n", 21);
-		exit(1);
+		ft_exit(1);
 	}
 	map = malloc(sizeof(t_map));
 	if (!map)
-		exit(1);
+		ft_exit(1);
 	map->map_name = map_name;
 	map->points = get_map(fd, map);
 	close_file(fd, map);
@@ -44,7 +44,7 @@ t_map	*create_map(char *map_name, int fd, t_vars *vars)
 	{
 		free(map->map_name);
 		free(map);
-		exit(1);
+		ft_exit(1);
 	}
 	map->transform.position = (t_vector3){0, 0, 0, 0, (t_vector2){0, 0}};
 	map->transform.rotation = (t_quaternion){0, 0, 0, 0};

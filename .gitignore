@@ -2,6 +2,7 @@
 *.o
 *.a
 *.tmp
+*.dSYM
 .vscode
 .DS_Store
 FdF
