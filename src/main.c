@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:13:54 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 16:57:46 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/12 09:40:52 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	main(int argc, char **argv)
 	t_vars		vars;
 	t_map		*map;
 	t_camera	camera;
-
 
 	if (check_input(argc, argv) == 0)
 		return (RUN_ERROR);

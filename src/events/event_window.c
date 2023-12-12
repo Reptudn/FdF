@@ -6,7 +6,7 @@
 /*   By: jkauker <jkauker@student.42heilbrnn.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:12:31 by jkauker           #+#    #+#             */
-/*   Updated: 2023/12/11 16:57:13 by jkauker          ###   ########.fr       */
+/*   Updated: 2023/12/12 09:45:03 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	event_onfail(void *param, int rows)
 	ft_exit(0);
 }
 
+// system("leaks fdf");
 void	ft_exit(int exitcode)
 {
-	system("leaks fdf");
 	exit(exitcode);
 }
