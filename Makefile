@@ -1,6 +1,6 @@
 NAME	:= fdf
 
-CFLAGS	:= -Wextra -Wall -Werror
+CFLAGS	:= -Wextra -Wall
 
 LIBMLX	:= ./lib/MLX42
 
